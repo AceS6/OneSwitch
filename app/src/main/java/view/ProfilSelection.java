@@ -7,13 +7,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.*;
 import android.provider.Settings;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projeta.oneswitch.R;
@@ -44,6 +47,8 @@ public class ProfilSelection extends ListActivity{
         ArrayAdapter<Profil> adapter = new ArrayAdapter<Profil>(this,
                 android.R.layout.simple_list_item_1, profils);
         setListAdapter(adapter);
+
+        registerForContextMenu(getListView());
     }
 
     @Override
@@ -73,40 +78,44 @@ public class ProfilSelection extends ListActivity{
         this.finish();
     }
 
-    public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
-        final Profil p = (Profil) getListAdapter().getItem(position);
-        Toast.makeText(this, "clic long : " + p.getName(), Toast.LENGTH_LONG).show();
+    @Override
+    public void onCreateContextMenu(ContextMenu contextMenu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        contextMenu.add(0, 1, 0, "Supprimer");
+    }
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
 
-        alert.setTitle("Supprimer ce profil?");
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case 0:
+                return true;
+            case 1:
+                this.deleteProfil(info.position);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
 
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+    public void deleteProfil(int position){
 
-                // On supprime le profil selectionné de la bdd interne
-                ProfilsDAO pDao = new ProfilsDAO(context);
-                pDao.open();
-                pDao.deleteProfil(p.getId());
-                pDao.close();
+        Profil p = (Profil) getListAdapter().getItem(position);
+        // On supprime le profil selectionné de la bdd interne
+        ProfilsDAO pDao = new ProfilsDAO(context);
+        pDao.open();
+        pDao.deleteProfil(p.getId());
+        pDao.close();
 
-                // Si le profil supprimé était le profil courrant on met un profil par défaut
-                if(Globale.engine.getProfil().getId() == p.getId()){
-                    Profil defaultP = new Profil(-1, "Default", "Line Pointing", 50, 10, "#000000", "#000000", "#000000", 50, 50);
-                    Globale.engine.setProfil(defaultP);
-                }
+        // Si le profil supprimé était le profil courrant on met un profil par défaut
+        if(Globale.engine.getProfil().getId() == p.getId()){
+            Profil defaultP = new Profil(-1, "Default", "Line Pointing", 50, 10, "#000000", "#000000", "#000000", 50, 50);
+            Globale.engine.setProfil(defaultP);
+        }
 
-            }
-        });
+        ((BaseAdapter) getListView().getAdapter()).notifyDataSetChanged();
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
-            }
-        });
-
-        alert.show();
-        return true;
     }
 
 }

@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Quentin\AndroidStudioProjects\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="C:\Users\Quentin\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-e9ba5eac94c1663e482c1cd64d8e6cfc2ee36e29.jar" />
-    </item>
-    <item
-        jar="C:\Users\Quentin\.gradle\caches\modules-2\files-2.1\com.jayway.android.robotium\robotium-solo\5.2.1\56ab8d87d966a067ee3795ee137fbd51b6581ec9\robotium-solo-5.2.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="56ab8d87d966a067ee3795ee137fbd51b6581ec9">
-        <dex dex="C:\Users\Quentin\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\robotium-solo-5.2.1-93b2537f99a1ec27d5d93b725cc1974275057fc7.jar" />
-    </item>
-    <item
-        jar="C:\Users\Quentin\AndroidStudioProjects\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
-        <dex dex="C:\Users\Quentin\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\classes-bc759e93b85c112400693af49732128782c4e0ab.jar" />
-    </item>
-    <item
-        jar="C:\Users\Quentin\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jar="C:\Users\Alexis\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="C:\Users\Quentin\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-3eaf7083b85dba22e86b51fe10527a3b306acf5d.jar" />
+        <dex dex="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-517a4ab791a4fb2fc96aec0b78f7656c529aff52.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\classes-7776000a571f76afe6c9d48b90728a2015ed3285.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexis\.gradle\caches\modules-2\files-2.1\com.jayway.android.robotium\robotium-solo\5.2.1\56ab8d87d966a067ee3795ee137fbd51b6581ec9\robotium-solo-5.2.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="56ab8d87d966a067ee3795ee137fbd51b6581ec9">
+        <dex dex="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\robotium-solo-5.2.1-dfc91a2508c61ee58603812ec1f00781dddf0e93.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-34a8a97095755e04c296802cfd8cf8ee0614e9f9.jar" />
     </item>
 
 </items>
