@@ -1,5 +1,7 @@
 package data;
 
+import android.graphics.Color;
+
 import data.db.ProfilsDAO;
 
 /**
@@ -100,6 +102,14 @@ public class Profil {
         return this.lineColorV;
     }
 
+    public int getColorLineHInt(){
+        return Color.parseColor(this.lineColorH);
+    }
+
+    public int getColorLineVInt(){
+        return Color.parseColor(this.lineColorV);
+    }
+
     public void setLineSpeed(int speed){
         this.lineSpeed=speed;
     }
@@ -115,6 +125,10 @@ public class Profil {
 
     public String getColorSquare(){
         return this.squareColor;
+    }
+
+    public int getColorSquareInt(){
+        return Color.parseColor(this.squareColor);
     }
 
     public static String getSemiTransparentColor(String color){

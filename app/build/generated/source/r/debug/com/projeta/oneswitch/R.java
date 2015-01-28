@@ -119,12 +119,13 @@ public final class R {
         public static final int pointage_couleur_v=0x7f0a0009;
         public static final int pointage_description=0x7f0a000a;
         public static final int pointage_ligne_taille=0x7f0a000b;
-        public static final int profil_name=0x7f0a000c;
-        public static final int speed=0x7f0a000d;
-        public static final int square_couleur=0x7f0a000e;
-        public static final int square_size_x=0x7f0a000f;
-        public static final int square_size_y=0x7f0a0010;
-        public static final int squarepointing=0x7f0a0011;
+        public static final int profil_id=0x7f0a000c;
+        public static final int profil_name=0x7f0a000d;
+        public static final int speed=0x7f0a000e;
+        public static final int square_couleur=0x7f0a000f;
+        public static final int square_size_x=0x7f0a0010;
+        public static final int square_size_y=0x7f0a0011;
+        public static final int squarepointing=0x7f0a0012;
     }
     public static final class style {
         /** 

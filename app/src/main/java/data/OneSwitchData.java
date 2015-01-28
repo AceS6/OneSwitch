@@ -25,7 +25,7 @@ public class OneSwitchData {
     // --------- CONSTRUCTOR
 	
 	public OneSwitchData(){
-        profil = new Profil(-2, "default", "Line Pointing", 70, 10, "#000000", "#000000", "#000000", 80, 50);
+        this.setDefaultProfil();
         serviceState=false;
         propertyChangeSupport = new PropertyChangeSupport(this);
 	}
@@ -41,6 +41,10 @@ public class OneSwitchData {
 
     public void setProfil(Profil p){
         this.profil = p;
+    }
+
+    public void setDefaultProfil(){
+        profil = new Profil(-2, "Default", "Line Pointing", 15, 10, "#000000", "#000000", "#000000", 80, 50);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
