@@ -7,6 +7,7 @@ import com.projeta.oneswitch.R;
 
 import control.thread.EventSelection;
 
+import data.Globale;
 import service.OneSwitchService;
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,16 +30,18 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
     
 	private GestureDetector gestureDetector;
 	private View b1, b2, b3;
+    private View globalview;
 	private WindowManager windowmanager;
 	private Context c;
 	private Animation hyperspaceJumpAnimation, appear, disappear;
 	
 	private EventSelection thread;
 	
-    public ServiceEventListener(Context c, WindowManager windowmanager, View b1, View b2, View b3){
+    public ServiceEventListener(Context c, WindowManager windowmanager, View globalView, View b1, View b2, View b3){
         gestureDetector = new GestureDetector(c, this);
         this.c=c;
         this.windowmanager=windowmanager;
+        this.globalview=globalView;
         this.b1=b1;
         this.b2=b2;
         this.b3=b3;    
@@ -64,6 +68,7 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
         params.gravity = Gravity.CENTER;
 		
     }
+
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {	
 		return gestureDetector.onTouchEvent(event);
@@ -101,24 +106,21 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
 		// TODO Auto-generated method stub
 		 Log.e("", "Longpress detected");  
 		 this.appearCompletely();
-			Toast.makeText(c, "Longpress detected", Toast.LENGTH_SHORT).show();
 	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-
+            //windowmanager.removeView();
 			if(v==b1){
-				Toast.makeText(c, "1", Toast.LENGTH_SHORT).show();
 				OneSwitchService.startPointing(v, OneSwitchService.LINE_POINTING);
 			}
 			else if(v==b2){
-				Toast.makeText(c, "2", Toast.LENGTH_SHORT).show();
 				OneSwitchService.startPointing(v, OneSwitchService.SQUARE_POINTING);
 			}
 			else if(v==b3){
-				Toast.makeText(c, "3 mais a fait rien :p", Toast.LENGTH_SHORT).show();
-			}
-			disappearCompletely();	
+                Globale.engine.setServiceState(false);
+            }
+			disappearCompletely();
 	}
 	
 	private void disappearCompletely(){
@@ -135,13 +137,12 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
 	@Override
 	public void onAnimationStart(Animation animation) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		// TODO Auto-generated method stub
 		if(animation==disappear){
-			windowmanager.removeView(b1.getRootView());
+			windowmanager.removeView(globalview);
 		}
 	}
 	@Override

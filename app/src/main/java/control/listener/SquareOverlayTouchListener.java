@@ -5,11 +5,16 @@ import pointing.square.MoveHorizontalSquareQuarter;
 import pointing.square.MoveVerticalSquareHalf;
 import pointing.square.MoveVerticalSquareQuarter;
 import data.Globale;
+
+import android.graphics.PixelFormat;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
+
+import com.projeta.oneswitch.R;
 
 public class SquareOverlayTouchListener implements OnTouchListener{
 
@@ -71,10 +76,23 @@ public class SquareOverlayTouchListener implements OnTouchListener{
 				this.state=QUARTER;
 			}
 			else if(this.state==QUARTER){
-				windowmanager.removeView(globalview);
+                windowmanager.removeView(globalview);
+                //OneSwitchService.clickOnScreen(horizontalLine.getLeft(), verticalLine.getTop());
+                if(Globale.engine.getServiceState()) {
+                    listen();
+                }
 			}
 		}
 		return false;
 	}
+
+    public void listen(){
+        LayoutInflater inflater = LayoutInflater.from(globalview.getContext());
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
+        globalview = inflater.inflate(R.layout.action_selection, null);
+        windowmanager.addView(globalview, params);
+        globalview.setOnTouchListener(new ServiceEventListener(globalview.getContext(), windowmanager, globalview, globalview.findViewById(R.id.button1), globalview.findViewById(R.id.button2), globalview.findViewById(R.id.button3)));
+    }
 
 }

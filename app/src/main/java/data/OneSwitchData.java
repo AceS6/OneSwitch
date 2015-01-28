@@ -2,6 +2,9 @@ package data;
 
 import android.view.WindowManager;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class OneSwitchData {
 
     // ---------- ATTRIBUTES
@@ -11,6 +14,10 @@ public class OneSwitchData {
     private int width;
     private int height;
 
+    protected PropertyChangeSupport propertyChangeSupport;
+
+    private boolean serviceState;
+
 	public final static String pointing_key="pref_pointing";
 
 
@@ -19,6 +26,8 @@ public class OneSwitchData {
 	
 	public OneSwitchData(){
         profil = new Profil(-2, "default", "Line Pointing", 70, 10, "#000000", "#000000", "#000000", 80, 50);
+        serviceState=false;
+        propertyChangeSupport = new PropertyChangeSupport(this);
 	}
 
 
@@ -32,6 +41,17 @@ public class OneSwitchData {
 
     public void setProfil(Profil p){
         this.profil = p;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public boolean getServiceState(){ return serviceState;}
+
+    public void setServiceState(boolean serviceState){
+        this.serviceState=serviceState;
+        propertyChangeSupport.firePropertyChange("serviceState",!serviceState, serviceState);
     }
 
     public int getWidth() {

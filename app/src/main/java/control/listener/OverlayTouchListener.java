@@ -1,16 +1,20 @@
 package control.listener;
 
-import com.robotium.solo.Solo;
-
 import android.app.Instrumentation;
+import android.graphics.PixelFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
+
+import com.projeta.oneswitch.R;
+import com.robotium.solo.Solo;
+
+import data.Globale;
 import pointing.line.MoveHorizontalLine;
 import pointing.line.MoveVerticalLine;
-import service.OneSwitchService;
 
 public class OverlayTouchListener implements OnTouchListener, Runnable{
 
@@ -26,6 +30,7 @@ public class OverlayTouchListener implements OnTouchListener, Runnable{
 
     private MoveHorizontalLine horizontalMove;
     private MoveVerticalLine verticalMove;
+
 
     public OverlayTouchListener(WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, View horizontalLine, View verticalLine, int width, int height){
         this.windowmanager=windowmanager;
@@ -62,11 +67,22 @@ public class OverlayTouchListener implements OnTouchListener, Runnable{
                 Log.d(TAG, "width="+horizontalLine.getLeft());
                 Log.d(TAG, "height="+verticalLine.getTop());
                 windowmanager.removeView(globalview);
-                OneSwitchService.clickOnScreen(horizontalLine.getLeft(), verticalLine.getTop());
+                //OneSwitchService.clickOnScreen(horizontalLine.getLeft(), verticalLine.getTop());
+                if(Globale.engine.getServiceState()) {
+                    listen();
+                }
             }
-
         }
         return false;
+    }
+
+    public void listen(){
+        LayoutInflater inflater = LayoutInflater.from(globalview.getContext());
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
+        globalview = inflater.inflate(R.layout.action_selection, null);
+        windowmanager.addView(globalview, params);
+        globalview.setOnTouchListener(new ServiceEventListener(globalview.getContext(), windowmanager, globalview, globalview.findViewById(R.id.button1), globalview.findViewById(R.id.button2), globalview.findViewById(R.id.button3)));
     }
 
     @Override
