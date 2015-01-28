@@ -1,12 +1,5 @@
 package view;
 
-import data.Profil;
-import data.db.ProfilsDAO;
-import service.OneSwitchService;
-
-import com.projeta.oneswitch.R;
-import data.Globale;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,17 +11,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.projeta.oneswitch.R;
 
-public class MainActivity extends Activity {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import data.Globale;
+import data.Profil;
+import data.db.ProfilsDAO;
+import service.OneSwitchService;
+
+
+public class MainActivity extends Activity implements PropertyChangeListener {
 
     final Context context = this;
-    private boolean serviceActivated;
     private Switch service;
 
     @Override
@@ -45,9 +45,9 @@ public class MainActivity extends Activity {
 
         Globale.engine.setWidth(width);
         Globale.engine.setHeight(height);
-        serviceActivated=false;
-    }
 
+        Globale.engine.addPropertyChangeListener(this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,7 +66,6 @@ public class MainActivity extends Activity {
         if(id == R.id.add_profil){
             addProfil();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -103,23 +102,15 @@ public class MainActivity extends Activity {
 
     public void startPointing(View v){
         Log.d("start", "start pointing");
-        if(this.serviceActivated){
-            OneSwitchService.startPointing(v);
-        }
-        else{
-            Toast.makeText(this, "Le service n'est pas démarré", Toast.LENGTH_LONG).show();
-        }
+        OneSwitchService.startPointing(v);
+        Toast.makeText(this, "Lancement du Test (Systeme de pointage : "+Globale.engine.getProfil().getPointing(), Toast.LENGTH_LONG).show();
     }
 
     public void startService(View v){
-        if(!serviceActivated){
+        if(!Globale.engine.getServiceState()){
+            Globale.engine.setServiceState(true);
             startService(new Intent(this, OneSwitchService.class));
-            Toast.makeText(this, "OneSwitch démarré", Toast.LENGTH_LONG).show();
         }
-        else{
-            Toast.makeText(this, "OneSwitch arrété", Toast.LENGTH_LONG).show();
-        }
-        serviceActivated=!serviceActivated;
     }
 
     public void settings(View v){
@@ -135,7 +126,7 @@ public class MainActivity extends Activity {
     public void addProfil(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle("Créer un nouveau profil");
+        alert.setTitle("CrÃ©er un nouveau profil");
         alert.setMessage("Nom : ");
 
         final EditText input = new EditText(this);
@@ -146,13 +137,13 @@ public class MainActivity extends Activity {
                 String value = input.getText().toString();
                 Profil p = new Profil(-1, value, "Line Pointing", 50, 10, "#000000", "#000000", "#000000", 50, 50);
 
-                // On envoi le nouveau profil à la bdd interne
+                // On envoi le nouveau profil Ã  la bdd interne
                 ProfilsDAO pDao = new ProfilsDAO(context);
                 pDao.open();
                 int idP = (int) pDao.insertProfil(p);
                 pDao.close();
 
-                // On met à jour le nouveau profil dans l'application avec le bon identifiant
+                // On met Ã  jour le nouveau profil dans l'application avec le bon identifiant
                 p.setId(idP);
                 Globale.engine.setProfil(p);
 
@@ -166,5 +157,12 @@ public class MainActivity extends Activity {
         });
 
         alert.show();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        if (propertyChangeEvent.getPropertyName().equals("serviceState")) {
+            service.setChecked((Boolean) propertyChangeEvent.getNewValue());
+        }
     }
 }

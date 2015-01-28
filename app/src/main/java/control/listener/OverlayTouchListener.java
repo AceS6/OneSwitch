@@ -15,6 +15,7 @@ import com.robotium.solo.Solo;
 import data.Globale;
 import pointing.line.MoveHorizontalLine;
 import pointing.line.MoveVerticalLine;
+import service.OneSwitchService;
 
 public class OverlayTouchListener implements OnTouchListener, Runnable{
 
@@ -67,7 +68,7 @@ public class OverlayTouchListener implements OnTouchListener, Runnable{
                 Log.d(TAG, "width="+horizontalLine.getLeft());
                 Log.d(TAG, "height="+verticalLine.getTop());
                 windowmanager.removeView(globalview);
-                //OneSwitchService.clickOnScreen(horizontalLine.getLeft(), verticalLine.getTop());
+                OneSwitchService.clickOnScreen(horizontalLine.getLeft(), verticalLine.getTop());
                 if(Globale.engine.getServiceState()) {
                     listen();
                 }
