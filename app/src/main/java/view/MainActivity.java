@@ -9,10 +9,14 @@ import data.Globale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +34,7 @@ public class MainActivity extends Activity {
     final Context context = this;
     private boolean serviceActivated;
     private Switch service;
+    public static final int NOTIFICATION_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +118,24 @@ public class MainActivity extends Activity {
 
     public void startService(View v){
         if(!serviceActivated){
+
+            Intent intent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            builder.setSmallIcon(R.drawable.ic_launcher);
+
+            // Set the intent that will fire when the user taps the notification.
+            builder.setContentIntent(pendingIntent);
+            builder.setAutoCancel(true);
+            builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+
+            builder.setContentTitle("Service OneSwitch");
+            builder.setContentText("Appuyer pour revenir sur l'application");
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(
+                    NOTIFICATION_SERVICE);
+            notificationManager.notify(NOTIFICATION_ID, builder.build());
+
             startService(new Intent(this, OneSwitchService.class));
             Toast.makeText(this, "OneSwitch démarré", Toast.LENGTH_LONG).show();
         }
