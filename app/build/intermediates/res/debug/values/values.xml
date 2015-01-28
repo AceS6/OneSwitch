@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="pointages">
+    <item>"Line Pointing"</item>
+    <item>"Square Pointing"</item>
+</string-array>
+    <integer-array name="pointages_id">
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+    <!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="bleu">#5c6bc0</color>
+    <color name="dark_grey">#424242</color>
+    <color name="jaune">#ffee58</color>
+    <color name="light_grey">#cccccc</color>
+    <color name="magenta">#ec407a</color>
+    <color name="marron">#8d6e63</color>
+    <color name="orange">#ffa726</color>
+    <color name="rose">#ff2d6f</color>
+    <color name="rouge">#e84e40</color>
+    <color name="semi_transparent_bleu">#505c6bc0</color>
+    <color name="semi_transparent_orange">#50ffa726</color>
+    <color name="semi_transparent_rouge">#50e84e40</color>
+    <color name="semi_transparent_vert">#504caf50</color>
+    <color name="text">#87000000</color>
+    <color name="textSecondaire">#54000000</color>
+    <color name="vert">#4caf50</color>
+    <color name="vert_fonce">#259b24</color>
+    <color name="violet">#ab47bc</color>
+    <color name="white">#fafafa</color>
+    <!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <integer name="pointage_ligne_taille_defaut">1</integer>
+    <string name="accueil_1">Lancer le Service</string>
+    <string name="accueil_2">Tester le pointage</string>
+    <string name="accueil_3">Paramétrage du Service</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">OneSwitch</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="linepointing">Line Pointing</string>
+    <string name="pointage">Système de pointage</string>
+    <string name="pointage_couleur_h">Couleur de la barre Horizontale</string>
+    <string name="pointage_couleur_v">Couleur de la barre Verticale</string>
+    <string name="pointage_description">Système de pointage par défaut</string>
+    <string name="pointage_ligne_taille">Taille du trait</string>
+    <string name="profil_name">Default</string>
+    <string name="speed">Vitesse de déplacement du système de pointage</string>
+    <string name="square_couleur">Couleur du rectangle</string>
+    <string name="square_size_x">Largeur de la zone</string>
+    <string name="square_size_y">Hauteur de la zone</string>
+    <string name="squarepointing">Square Pointing</string>
+    <!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>
