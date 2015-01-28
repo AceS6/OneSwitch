@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
+
+
+   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:layout_marginBottom="5dp">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3"
+            android:columnOrderPreserved="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="bottom">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:layout_row="0"
+                android:layout_column="0"
+                style="@style/AppBaseTheme"
+                android:src="@drawable/ic_action_left_slide"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1" />
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton7"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:src="@drawable/ic_action_slider"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1" />
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton8"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:src="@drawable/ic_action_right_slide"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1" />
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton3"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:src="@drawable/ic_action_up_slide"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1" />
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton6"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:src="@drawable/ic_action_down_slide"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1"/>
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:src="@drawable/ic_action_pinch"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1" />
+
+            <!-- Le bouton est caché pour l'instant, ne contient pas d'icone.-->
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton4"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+
+                android:alpha="0" />
+
+            <ImageButton
+                style="@style/AppBaseTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton5"
+                android:layout_row="2"
+                android:layout_column="2"
+                android:src="@drawable/ic_action_spread"
+                android:background="@drawable/option_button"
+                android:padding="5dp"
+                android:alpha="1" />
+        </GridLayout>
+    </LinearLayout>
+
+</RelativeLayout>
+
+
