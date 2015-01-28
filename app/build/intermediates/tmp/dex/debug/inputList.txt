@@ -1,0 +1,5 @@
+C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\classes\debug
+C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-517a4ab791a4fb2fc96aec0b78f7656c529aff52.jar
+C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-34a8a97095755e04c296802cfd8cf8ee0614e9f9.jar
+C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\robotium-solo-5.2.1-dfc91a2508c61ee58603812ec1f00781dddf0e93.jar
+C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\classes-7776000a571f76afe6c9d48b90728a2015ed3285.jar

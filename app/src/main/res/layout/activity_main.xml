@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/gradient"
+    >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/accueil_1"
+            android:id="@+id/textView" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Service actif"
+            android:id="@+id/switch1"
+            android:checked="false"
+            android:onClick="startService"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/accueil_2"
+            android:id="@+id/textView2" />
+
+        <ImageButton
+            android:id="@+id/startpointing"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pointer2"
+            android:onClick="startPointing"
+            android:background="@drawable/border_shadow"
+            android:layout_marginBottom="15px"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/accueil_3"
+            android:id="@+id/textView3"
+            style="@style/AppTheme" />
+
+        <ImageButton
+            android:id="@+id/advancedparameter"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/parameters"
+            android:onClick="settings"
+            android:background="@drawable/border_shadow"
+            android:layout_marginBottom="15px"/>
+
+        <ImageButton
+            android:id="@+id/profil"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profil"
+            android:onClick="profilSelection"
+            android:background="@drawable/border_shadow"
+            android:layout_marginBottom="15px"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

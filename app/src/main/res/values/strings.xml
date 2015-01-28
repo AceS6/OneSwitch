@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OneSwitch</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="profil_name">Default</string>
+    <string name="linepointing">Line Pointing</string>
+    <string name="squarepointing">Square Pointing</string>
+    <string name="pointage">Système de pointage</string>
+    <string name="pointage_description">Système de pointage par défaut</string>
+    <string name="speed">Vitesse de déplacement du système de pointage</string>
+    
+    <string name="pointage_couleur_h">Couleur de la barre Horizontale</string>
+    <string name="pointage_couleur_v">Couleur de la barre Verticale</string>
+    <string name="pointage_ligne_taille">Taille du trait</string>
+    <integer name="pointage_ligne_taille_defaut">1</integer>
+    
+    <string name="square_couleur">Couleur du rectangle</string>
+    <string name="square_size_x">Largeur de la zone</string>
+    <string name="square_size_y">Hauteur de la zone</string>
+
+
+
+    <string name="accueil_1">Lancer le Service</string>
+    <string name="accueil_2">Tester le pointage</string>
+    <string name="accueil_3">Paramétrage du Service</string>
+
+    <integer-array name="pointages_id">
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+    
+    <string-array name="pointages">
+    <item>"Line Pointing"</item>
+    <item>"Square Pointing"</item>
+</string-array>
+    
+
+</resources>
