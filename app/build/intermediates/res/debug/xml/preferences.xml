@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+		android:title="Préférences">
+		
+			<PreferenceCategory
+			    android:title="Système de pointage">
+	    		    <ListPreference
+		        android:id="@+id/pref_pointing"
+		        android:key="pref_pointing"
+		        android:entries="@array/pointages"
+		        android:entryValues="@array/pointages"
+		        android:title="@string/pointage"
+		        android:dialogTitle="@string/pointage_description"/>
+	    		    
+	    		    <view.custom.SeekBarPreference
+	    		        android:key="speed"
+        				android:title="@string/speed"
+	    		        />
+	    
+	    </PreferenceCategory>
+	    
+			<PreferenceCategory
+			    android:title="Line Pointing Configuration"> 		    
+	    		    <view.custom.ColorPickerPreferenceDialog
+	    		        android:key="pointingline_color_v"
+        				android:title="@string/pointage_couleur_v"/>
+	    		    
+	    		    <view.custom.ColorPickerPreferenceDialog
+	    		        android:key="pointingline_color_h"
+        				android:title="@string/pointage_couleur_h"/>
+	    		    
+	    		    <view.custom.SeekBarPreference
+	    		        android:key="pointingline_size"
+        				android:title="@string/pointage_ligne_taille"
+	    		        />
+	    
+	    </PreferenceCategory>
+	    
+	    
+			<PreferenceCategory
+			    android:title="Square Pointing Configuration"> 		    
+	    		    <view.custom.ColorPickerPreferenceDialog
+	    		        android:key="pointingsquare_color"
+        				android:title="@string/square_couleur"/>    		   
+	    		    
+	    		    <view.custom.SeekBarPreference
+	    		        android:key="pointingsquare_width"
+        				android:title="@string/square_size_x"
+	    		        />
+	    		    
+	    		    <view.custom.SeekBarPreference
+	    		        android:key="pointingsquare_height"
+        				android:title="@string/square_size_y"
+	    		        />
+	    
+	    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen><!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/xml/preferences.xml -->

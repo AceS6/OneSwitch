@@ -1,5 +1,12 @@
 package view;
 
+import data.Profil;
+import data.db.ProfilsDAO;
+import service.OneSwitchService;
+
+import com.projeta.oneswitch.R;
+import data.Globale;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,24 +18,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.projeta.oneswitch.R;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import data.Globale;
-import data.Profil;
-import data.db.ProfilsDAO;
-import service.OneSwitchService;
-
-
-public class MainActivity extends Activity implements PropertyChangeListener {
+public class MainActivity extends Activity {
 
     final Context context = this;
+    private boolean serviceActivated;
     private Switch service;
 
     @Override
@@ -45,9 +45,9 @@ public class MainActivity extends Activity implements PropertyChangeListener {
 
         Globale.engine.setWidth(width);
         Globale.engine.setHeight(height);
-
-        Globale.engine.addPropertyChangeListener(this);
+        serviceActivated=false;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,6 +66,7 @@ public class MainActivity extends Activity implements PropertyChangeListener {
         if(id == R.id.add_profil){
             addProfil();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,15 +103,23 @@ public class MainActivity extends Activity implements PropertyChangeListener {
 
     public void startPointing(View v){
         Log.d("start", "start pointing");
-        OneSwitchService.startPointing(v);
-            Toast.makeText(this, "Lancement du Test (Systeme de pointage : "+Globale.engine.getProfil().getPointing(), Toast.LENGTH_LONG).show();
+        if(this.serviceActivated){
+            OneSwitchService.startPointing(v);
+        }
+        else{
+            Toast.makeText(this, "Le service n'est pas démarré", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void startService(View v){
-        if(!Globale.engine.getServiceState()){
-            Globale.engine.setServiceState(true);
+        if(!serviceActivated){
             startService(new Intent(this, OneSwitchService.class));
+            Toast.makeText(this, "OneSwitch démarré", Toast.LENGTH_LONG).show();
         }
+        else{
+            Toast.makeText(this, "OneSwitch arrété", Toast.LENGTH_LONG).show();
+        }
+        serviceActivated=!serviceActivated;
     }
 
     public void settings(View v){
@@ -157,12 +166,5 @@ public class MainActivity extends Activity implements PropertyChangeListener {
         });
 
         alert.show();
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-        if (propertyChangeEvent.getPropertyName().equals("serviceState")) {
-            service.setChecked((Boolean) propertyChangeEvent.getNewValue());
-        }
     }
 }

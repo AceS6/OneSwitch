@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+        <Button 
+        android:id="@+id/linepointing_service"
+        android:text="@string/linepointing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="pointing"
+        />
+   
+    
+    <Button 
+        android:id="@+id/squarepointing_service"
+        android:text="@string/squarepointing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="pointing"
+        />
+    
+
+</LinearLayout>
+<!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/layout/activity_settings.xml -->
