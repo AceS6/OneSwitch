@@ -96,33 +96,6 @@ public class ProfilsDAO {
         return ret;
     }
 
-    public Profil getProfil(int idProfil){
-        Profil ret = null;
-        int tmpId, tmpLineSpeed, tmpLineSize, tmpSquareWidth, tmpSquareHeight;
-        String tmpName, tmpPointing, tmpLineColorH, tmpLineColorV, tmpSquareColor;
-
-        Cursor c = db.query(PROFIL, new String[] {PROFIL_ID, PROFIL_NAME, PROFIL_POINTING, PROFIL_LINE_SPEED, PROFIL_LINE_SIZE, PROFIL_LINE_COLORH, PROFIL_LINE_COLORV, PROFIL_SQUARE_WIDTH, PROFIL_SQUARE_HEIGHT, PROFIL_SQUARE_COLOR},  PROFIL_ID + " LIKE '" + idProfil + "'", null, null, null, null);
-
-        while(c.moveToNext()) {
-
-            tmpId = c.getInt(0);
-            tmpName = c.getString(1);
-            tmpPointing = c.getString(2);
-            tmpLineSpeed = c.getInt(3);
-            tmpLineSize = c.getInt(4);
-            tmpLineColorH = c.getString(5);
-            tmpLineColorV = c.getString(6);
-            tmpSquareWidth = c.getInt(7);
-            tmpSquareHeight = c.getInt(8);
-            tmpSquareColor = c.getString(9);
-
-            ret = new Profil(tmpId, tmpName, tmpPointing, tmpLineSpeed, tmpLineSize, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpSquareWidth, tmpSquareHeight);
-        }
-        c.close();
-
-        return ret;
-    }
-
     public double insertProfil(Profil p){
         long ret = 0;
 
@@ -150,24 +123,6 @@ public class ProfilsDAO {
 
     public void deleteProfil(int idProfil){
         db.delete(PROFIL, PROFIL_ID + "=" + idProfil, null);
-    }
-
-    public void saveProfil(Profil p){
-
-        ContentValues values=new ContentValues();
-
-        values.put(PROFIL_NAME , p.getName());
-        values.put(PROFIL_POINTING,p.getPointing());
-        values.put(PROFIL_LINE_SPEED, p.getLineSpeed());
-        values.put(PROFIL_LINE_SIZE , p.getLineSize());
-        values.put(PROFIL_LINE_COLORH , p.getColorLineH());
-        values.put(PROFIL_LINE_COLORV , p.getColorLineV());
-        values.put(PROFIL_SQUARE_WIDTH , p.getSquareWidth());
-        values.put(PROFIL_SQUARE_HEIGHT , p.getSquareHeight());
-        values.put(PROFIL_SQUARE_COLOR , p.getColorSquare());
-
-        db.update(PROFIL, values, PROFIL_ID + "=" +  p.getId(), null);
-
     }
 
 }

@@ -19,14 +19,11 @@ import data.Globale;
 import data.OneSwitchData;
 
 public class Settings extends PreferenceActivity {
-
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new InnerPreferenceFragment()).commit();
-
-        setTitle(Globale.engine.getProfil().getName());
+		 super.onCreate(savedInstanceState);
+		 getFragmentManager().beginTransaction().replace(android.R.id.content, new InnerPreferenceFragment()).commit();
     }
 	
     @Override
@@ -53,29 +50,29 @@ public class Settings extends PreferenceActivity {
         {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
-            Preference pref = findPreference("pref_pointing");
-            pref.setSummary(getPreferenceScreen().getSharedPreferences().getString("pref_pointing", Globale.engine.getProfil().getPointing()));
+            Preference pref = findPreference(OneSwitchData.pointing_key);
+            pref.setSummary(getPreferenceScreen().getSharedPreferences().getString(OneSwitchData.pointing_key, this.getResources().getString(R.string.linepointing)));
             
             Preference pref_speed = findPreference("speed");
-            pref_speed.setSummary(getPreferenceScreen().getSharedPreferences().getInt("speed", Globale.engine.getProfil().getLineSpeed())+"");
+            pref_speed.setSummary(getPreferenceScreen().getSharedPreferences().getInt("speed", 10)+"");
            
             Preference pointingline_color_v = findPreference("pointingline_color_v");
-            pointingline_color_v.setSummary(OneSwitchData.getHexaColor(getPreferenceScreen().getSharedPreferences().getInt("pointingline_color_v", Globale.engine.getProfil().getColorLineVInt())));
+            pointingline_color_v.setSummary(OneSwitchData.getHexaColor(getPreferenceScreen().getSharedPreferences().getInt("pointingline_color_v", -60000)));
             
             Preference pointingline_color_h = findPreference("pointingline_color_h");
-            pointingline_color_h.setSummary(OneSwitchData.getHexaColor(getPreferenceScreen().getSharedPreferences().getInt("pointingline_color_h", Globale.engine.getProfil().getColorLineHInt())));
+            pointingline_color_h.setSummary(OneSwitchData.getHexaColor(getPreferenceScreen().getSharedPreferences().getInt("pointingline_color_h", -60000)));
             
             Preference pointingline_size = findPreference("pointingline_size");
-            pointingline_size.setSummary(getPreferenceScreen().getSharedPreferences().getInt("pointingline_size", Globale.engine.getProfil().getLineSize())+"");
+            pointingline_size.setSummary(getPreferenceScreen().getSharedPreferences().getInt("pointingline_size", R.integer.pointage_ligne_taille_defaut)+"");
             
             Preference pointingsquare_color = findPreference("pointingsquare_color");
-            pointingsquare_color.setSummary(OneSwitchData.getSemiTransparentColor(OneSwitchData.getHexaColor(getPreferenceScreen().getSharedPreferences().getInt("pointingline_color_v", Globale.engine.getProfil().getColorSquareInt()))));
+            pointingsquare_color.setSummary(OneSwitchData.getSemiTransparentColor(OneSwitchData.getHexaColor(getPreferenceScreen().getSharedPreferences().getInt("pointingline_color_v", -60000))));
             
             Preference pointingsquare_width = findPreference("pointingsquare_width");
-            pointingsquare_width.setSummary(getPreferenceScreen().getSharedPreferences().getInt("pointingsquare_width", Globale.engine.getProfil().getSquareWidth())+"");
+            pointingsquare_width.setSummary(getPreferenceScreen().getSharedPreferences().getInt("pointingsquare_width", 50)+"");
             
             Preference pointingsquare_height = findPreference("pointingsquare_height");
-            pointingsquare_height.setSummary(getPreferenceScreen().getSharedPreferences().getInt("pointingsquare_height", Globale.engine.getProfil().getSquareHeight())+"");
+            pointingsquare_height.setSummary(getPreferenceScreen().getSharedPreferences().getInt("pointingsquare_height", 50)+"");
         }
         
         
@@ -84,7 +81,6 @@ public class Settings extends PreferenceActivity {
             super.onResume();
             getPreferenceScreen().getSharedPreferences()
                     .registerOnSharedPreferenceChangeListener(this);
-
         }
 
         @Override
@@ -99,7 +95,7 @@ public class Settings extends PreferenceActivity {
     			String key) {
     		// TODO Auto-generated method stub
             Preference pref = findPreference(key);
-    		 if (key.equals("pref_pointing")) {
+    		 if (key.equals(Globale.engine.pointing_key)) {
     	            // Set summary to be the user-description for the selected value
     	            pref.setSummary(sharedPreferences.getString(key, this.getResources().getString(R.string.linepointing)));
     	      }

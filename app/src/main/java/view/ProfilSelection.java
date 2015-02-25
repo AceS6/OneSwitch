@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.*;
 import android.provider.Settings;
 import android.view.ContextMenu;
@@ -35,7 +33,6 @@ import data.db.ProfilsDAO;
 public class ProfilSelection extends ListActivity{
 
     final Context context = this;
-    private ArrayAdapter<Profil> adapter;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -47,13 +44,11 @@ public class ProfilSelection extends ListActivity{
         pDao.close();
 
 
-       adapter = new ArrayAdapter<Profil>(this,
+        ArrayAdapter<Profil> adapter = new ArrayAdapter<Profil>(this,
                 android.R.layout.simple_list_item_1, profils);
         setListAdapter(adapter);
 
         registerForContextMenu(getListView());
-
-        setTitle(Globale.engine.getProfil().getName());
     }
 
     @Override
@@ -76,7 +71,11 @@ public class ProfilSelection extends ListActivity{
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        this.swapProfil(position);
+        Profil p = (Profil) getListAdapter().getItem(position);
+
+        Globale.engine.setProfil(p);
+        Toast.makeText(this, "Profil courrant : " + p.getName(), Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     @Override
@@ -100,23 +99,6 @@ public class ProfilSelection extends ListActivity{
         }
     }
 
-    public void swapProfil(int position){
-
-        // On sauvegarde les changements qu'il ya éventuellement eu sur le profil courant dans la bdd
-        ProfilsDAO pDao = new ProfilsDAO(context);
-        pDao.open();
-        pDao.saveProfil(Globale.engine.getProfil());
-        pDao.close();
-
-        // On change le profil courant avec celui qui a été cliqué
-        Profil p = (Profil) getListAdapter().getItem(position);
-        Globale.engine.setProfil(p);
-        Toast.makeText(this, "Nouveau profil courrant : " + p.getName(), Toast.LENGTH_LONG).show();
-
-        clearPref();
-        this.finish();
-    }
-
     public void deleteProfil(int position){
 
         Profil p = (Profil) getListAdapter().getItem(position);
@@ -128,23 +110,11 @@ public class ProfilSelection extends ListActivity{
 
         // Si le profil supprimé était le profil courrant on met un profil par défaut
         if(Globale.engine.getProfil().getId() == p.getId()){
-            Globale.engine.setDefaultProfil();
+            Profil defaultP = new Profil(-1, "Default", "Line Pointing", 50, 10, "#000000", "#000000", "#000000", 50, 50);
+            Globale.engine.setProfil(defaultP);
         }
 
-        adapter.remove(p);
-        adapter.notifyDataSetChanged();
-        Toast.makeText(this, "Le profil : "+p.getName()+" a été supprimé", Toast.LENGTH_LONG).show();
-
-        clearPref();
-
-    }
-
-    public void clearPref()
-    {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.commit();
+        ((BaseAdapter) getListView().getAdapter()).notifyDataSetChanged();
 
     }
 
