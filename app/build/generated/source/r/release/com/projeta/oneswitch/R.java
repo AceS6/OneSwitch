@@ -45,31 +45,44 @@ public final class R {
         public static final int activity_vertical_margin=0x7f080001;
     }
     public static final class drawable {
-        public static final int activ_greenbutton=0x7f020000;
-        public static final int activ_redbutton=0x7f020001;
-        public static final int border_shadow=0x7f020002;
-        public static final int gradient=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int parameters=0x7f020005;
-        public static final int pointer=0x7f020006;
-        public static final int pointer2=0x7f020007;
-        public static final int pressed_greenbutton=0x7f020008;
-        public static final int pressed_redbutton=0x7f020009;
-        public static final int profil=0x7f02000a;
-        public static final int swap=0x7f02000b;
+        public static final int border_shadow=0x7f020000;
+        public static final int gradient=0x7f020001;
+        public static final int ic_action_down_slide=0x7f020002;
+        public static final int ic_action_left_slide=0x7f020003;
+        public static final int ic_action_pinch=0x7f020004;
+        public static final int ic_action_right_slide=0x7f020005;
+        public static final int ic_action_slider=0x7f020006;
+        public static final int ic_action_spread=0x7f020007;
+        public static final int ic_action_up_slide=0x7f020008;
+        public static final int ic_action_wait=0x7f020009;
+        public static final int ic_add_profil=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int option_button=0x7f02000c;
+        public static final int parameters=0x7f02000d;
+        public static final int pointer=0x7f02000e;
+        public static final int pointer2=0x7f02000f;
+        public static final int profil=0x7f020010;
     }
     public static final class id {
-        public static final int action_settings=0x7f0d0011;
+        public static final int add_profil=0x7f0d0019;
         public static final int advancedparameter=0x7f0d0008;
         public static final int button1=0x7f0d0000;
         public static final int button2=0x7f0d0001;
         public static final int button3=0x7f0d0002;
         public static final int horizontal_line=0x7f0d000d;
+        public static final int imageButton=0x7f0d000f;
+        public static final int imageButton2=0x7f0d0014;
+        public static final int imageButton3=0x7f0d0012;
+        public static final int imageButton4=0x7f0d0015;
+        public static final int imageButton5=0x7f0d0016;
+        public static final int imageButton6=0x7f0d0013;
+        public static final int imageButton7=0x7f0d0010;
+        public static final int imageButton8=0x7f0d0011;
         public static final int linepointing_service=0x7f0d000a;
-        public static final int pref_pointing=0x7f0d0010;
+        public static final int pref_pointing=0x7f0d0018;
         public static final int profil=0x7f0d0009;
         public static final int seekbar=0x7f0d000c;
-        public static final int square_selection=0x7f0d000f;
+        public static final int square_selection=0x7f0d0017;
         public static final int squarepointing_service=0x7f0d000b;
         public static final int startpointing=0x7f0d0006;
         public static final int switch1=0x7f0d0004;
@@ -87,7 +100,8 @@ public final class R {
         public static final int activity_settings=0x7f030002;
         public static final int seekbar_preference=0x7f030003;
         public static final int service_linepointing=0x7f030004;
-        public static final int service_squarepointing=0x7f030005;
+        public static final int service_optionpointing=0x7f030005;
+        public static final int service_squarepointing=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -105,11 +119,12 @@ public final class R {
         public static final int pointage_couleur_v=0x7f0a0009;
         public static final int pointage_description=0x7f0a000a;
         public static final int pointage_ligne_taille=0x7f0a000b;
-        public static final int speed=0x7f0a000c;
-        public static final int square_couleur=0x7f0a000d;
-        public static final int square_size_x=0x7f0a000e;
-        public static final int square_size_y=0x7f0a000f;
-        public static final int squarepointing=0x7f0a0010;
+        public static final int profil_name=0x7f0a000c;
+        public static final int speed=0x7f0a000d;
+        public static final int square_couleur=0x7f0a000e;
+        public static final int square_size_x=0x7f0a000f;
+        public static final int square_size_y=0x7f0a0010;
+        public static final int squarepointing=0x7f0a0011;
     }
     public static final class style {
         /** 

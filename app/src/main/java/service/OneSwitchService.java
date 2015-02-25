@@ -7,6 +7,7 @@ import android.app.Instrumentation;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
@@ -279,22 +280,4 @@ public class OneSwitchService extends Service{
 
         return ret;
     }
-
-    public static void clickOnScreen(final int x, final int y) {
-        new Thread(new Runnable(){
-
-            @Override
-            public void run() {
-                Instrumentation mInst = new Instrumentation();
-                mInst.sendKeyDownUpSync( KeyEvent.KEYCODE_A );
-                mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(),
-                        SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0));
-                mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(),
-                        SystemClock.uptimeMillis(),MotionEvent.ACTION_UP, x, y, 0));
-            }
-        }).start();
-
-    }
-
-
 }

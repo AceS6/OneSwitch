@@ -86,7 +86,8 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
 	}
 	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
-		// TODO Auto-generated method stub
+        windowmanager.removeView(globalview);
+        OneSwitchService.startPointing(globalview, OneSwitchService.LINE_POINTING);
 		return false;
 	}
 	@Override
@@ -110,7 +111,7 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-            //windowmanager.removeView();
+        disappearCompletely();
 			if(v==b1){
 				OneSwitchService.startPointing(v, OneSwitchService.LINE_POINTING);
 			}
@@ -120,7 +121,6 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
 			else if(v==b3){
                 Globale.engine.setServiceState(false);
             }
-			disappearCompletely();
 	}
 	
 	private void disappearCompletely(){
