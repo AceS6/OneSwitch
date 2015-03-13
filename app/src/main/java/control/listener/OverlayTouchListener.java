@@ -1,6 +1,8 @@
 package control.listener;
 
+import android.Manifest;
 import android.app.Instrumentation;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,9 +10,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.projeta.oneswitch.R;
 import com.robotium.solo.Solo;
+
+import java.io.IOException;
 
 import data.Globale;
 import pointing.line.MoveHorizontalLine;
@@ -65,13 +71,35 @@ public class OverlayTouchListener extends PointingSystem implements OnTouchListe
                 verticalMove.cancel(true);
                 state=END;
 
+                RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
+                RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
+
                 Log.d(TAG, "width="+horizontalLine.getLeft());
                 Log.d(TAG, "height="+verticalLine.getTop());
+
+                int width = horizontalLine.getLeft();
+                int height = verticalLine.getTop();
+
                 windowmanager.removeView(globalview);
-                clickOnScreen(globalview.getContext(), horizontalLine.getLeft(), verticalLine.getTop());
-                if(Globale.engine.getServiceState()) {
+                if (globalview.getContext().getPackageManager().checkPermission(Manifest.permission.INJECT_EVENTS, globalview.getContext().getPackageName()) == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        Runtime r = Runtime.getRuntime();
+                        r.exec("su -c input tap " + width + " " + height);
+
+                        if (Globale.engine.getServiceState()) {
+                            listen(windowmanager, globalview);
+                        }
+                    } catch (IOException e) {
+                        Toast.makeText(globalview.getContext(), "Permission not granted", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Toast.makeText(globalview.getContext(), "Permission not granted", Toast.LENGTH_LONG).show();
                     listen(windowmanager, globalview);
                 }
+
+
             }
         }
         return false;

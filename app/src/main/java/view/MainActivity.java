@@ -110,6 +110,7 @@ public class MainActivity extends Activity implements PropertyChangeListener {
         if(!Globale.engine.getServiceState()){
             Globale.engine.setServiceState(true);
             startService(new Intent(this, OneSwitchService.class));
+            this.finish();
         }
     }
 

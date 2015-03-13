@@ -20,10 +20,10 @@ import com.projeta.oneswitch.R;
  */
 public abstract  class PointingSystem {
 
-    protected final void clickOnScreen(Context c, final int x, final int y){
+    protected final Thread clickOnScreen(Context c, final int x, final int y){
         PackageManager pm = c.getPackageManager();
         if (pm.checkPermission(Manifest.permission.INJECT_EVENTS, c.getPackageName()) == PackageManager.PERMISSION_GRANTED) {
-            new Thread(new Runnable(){
+            return new Thread(new Runnable(){
 
                 @Override
                 public void run() {
@@ -34,9 +34,10 @@ public abstract  class PointingSystem {
                     mInst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(),
                             SystemClock.uptimeMillis(),MotionEvent.ACTION_UP, x, y, 0));
                 }
-            }).start();
+            });
         } else {
             Toast.makeText(c, "Permission not granted", Toast.LENGTH_LONG).show();
+            return null;
         }
     }
 
