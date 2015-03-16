@@ -5,7 +5,7 @@
     android:layout_gravity="center_horizontal">
 
 
-   <LinearLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
@@ -30,7 +30,7 @@
                 android:src="@drawable/ic_action_left_slide"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1" />
+                android:alpha="0.5" />
 
             <ImageButton
                 style="@style/AppBaseTheme"
@@ -42,7 +42,7 @@
                 android:src="@drawable/ic_action_slider"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1" />
+                android:alpha="0.5" />
 
             <ImageButton
                 style="@style/AppBaseTheme"
@@ -54,7 +54,7 @@
                 android:src="@drawable/ic_action_right_slide"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1" />
+                android:alpha="0.5" />
 
             <ImageButton
                 style="@style/AppBaseTheme"
@@ -66,7 +66,7 @@
                 android:src="@drawable/ic_action_up_slide"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1" />
+                android:alpha="0.5" />
 
             <ImageButton
                 style="@style/AppBaseTheme"
@@ -78,7 +78,7 @@
                 android:src="@drawable/ic_action_down_slide"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1"/>
+                android:alpha="0.5"/>
 
             <ImageButton
                 style="@style/AppBaseTheme"
@@ -90,21 +90,21 @@
                 android:src="@drawable/ic_action_pinch"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1" />
+                android:alpha="0.5" />
 
             <!-- Le bouton est caché pour l'instant, ne contient pas d'icone.-->
 
             <ImageButton
                 style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="74dp"
+                android:layout_height="match_parent"
                 android:id="@+id/imageButton4"
                 android:layout_row="2"
                 android:layout_column="1"
+                android:src="@drawable/ic_action_exit"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-
-                android:alpha="0" />
+                android:alpha="0.5" />
 
             <ImageButton
                 style="@style/AppBaseTheme"
@@ -116,7 +116,7 @@
                 android:src="@drawable/ic_action_spread"
                 android:background="@drawable/option_button"
                 android:padding="5dp"
-                android:alpha="1" />
+                android:alpha="0.5" />
         </GridLayout>
     </LinearLayout>
 

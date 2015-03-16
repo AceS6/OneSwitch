@@ -46,8 +46,8 @@ public abstract  class PointingSystem {
         LayoutInflater inflater = LayoutInflater.from(globalview.getContext());
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
-        globalview = inflater.inflate(R.layout.action_selection, null);
+        globalview = inflater.inflate(R.layout.service_optionpointing, null);
         windowmanager.addView(globalview, params);
-        globalview.setOnTouchListener(new ServiceEventListener(globalview.getContext(), windowmanager, globalview, globalview.findViewById(R.id.button1), globalview.findViewById(R.id.button2), globalview.findViewById(R.id.button3)));
+        globalview.setOnTouchListener(new ServiceEventListener(globalview.getContext(), windowmanager, globalview));
     }
 }

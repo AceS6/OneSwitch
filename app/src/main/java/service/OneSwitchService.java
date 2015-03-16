@@ -1,24 +1,15 @@
 package service;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import android.app.Instrumentation;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.InputDevice;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -81,9 +72,9 @@ public class OneSwitchService extends Service{
                 WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
         params.gravity = Gravity.CENTER;
 
-        View globalview = inflater.inflate(R.layout.action_selection, null);
+        View globalview = inflater.inflate(R.layout.service_optionpointing, null);
         windowmanager.addView(globalview, params);
-        globalview.setOnTouchListener(new ServiceEventListener(this, windowmanager, globalview, globalview.findViewById(R.id.button1), globalview.findViewById(R.id.button2), globalview.findViewById(R.id.button3)));
+        globalview.setOnTouchListener(new ServiceEventListener(this, windowmanager, globalview));
 
     }
     public void startLinepointing(View v){

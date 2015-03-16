@@ -2,11 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Alexis\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jar="C:\Users\Alexis\AppData\Local\AndroidDev\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-517a4ab791a4fb2fc96aec0b78f7656c529aff52.jar" />
+        <dex dex="C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-5b805786d567e388540b513ebbb77f39406531c5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-4cbb91efc87c18e188dae103a357be43d12c4fe7.jar" />
     </item>
     <item
         jar="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
@@ -28,6 +35,13 @@
         revision="21.1.2"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
         <dex dex="C:\Users\Alexis\AndroidStudioProjects\OneSwitch\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-34a8a97095755e04c296802cfd8cf8ee0614e9f9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\classes-6c9b7d4f5aabe0d09b62e04b34a8070c46271158.jar" />
     </item>
 
 </items>
