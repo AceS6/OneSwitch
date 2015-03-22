@@ -28,8 +28,17 @@ public class Profils extends SQLiteOpenHelper {
     public static final String PROFIL_SQUARE_WIDTH = "squarewidth";
     public static final String PROFIL_SQUARE_HEIGHT = "squareheight";
     public static final String PROFIL_SQUARE_COLOR = "squarecolor";
+    public static final String PROFIL_SCROLL_SPEED = "scrollspeed";
 
 
+    // ----- CONTACT
+
+    public static final String CONTACT = "contact";
+    public static final String CONTACT_ID = "id";
+    public static final String CONTACT_NAME = "name";
+    public static final String CONTACT_NUMBER = "number";
+    public static final String CONTACT_KEY = "key";
+    public static final String CONTACT_PROFIL = "profil";
 
 
 
@@ -38,13 +47,22 @@ public class Profils extends SQLiteOpenHelper {
             + PROFIL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PROFIL_NAME + " TEXT DEFAULT 'unknown',"
             + PROFIL_POINTING + " TEXT DEFAULT 'Line Pointing',"
-            + PROFIL_LINE_SPEED + " INTEGER DEFAULT 50,"
-            + PROFIL_LINE_SIZE + " INTEGER DEFAULT 10,"
+            + PROFIL_LINE_SPEED + " INTEGER DEFAULT 5,"
+            + PROFIL_LINE_SIZE + " INTEGER DEFAULT 5,"
             + PROFIL_LINE_COLORH + " TEXT DEFAULT '#f44336',"
             + PROFIL_LINE_COLORV + " TEXT DEFAULT ' #f44336',"
-            + PROFIL_SQUARE_WIDTH + " INTEGER DEFAULT 50,"
-            + PROFIL_SQUARE_HEIGHT + " INTEGER DEFAULT 50,"
-            + PROFIL_SQUARE_COLOR + " TEXT DEFAULT ' #f44336'"
+            + PROFIL_SQUARE_WIDTH + " INTEGER DEFAULT 5,"
+            + PROFIL_SQUARE_HEIGHT + " INTEGER DEFAULT 5,"
+            + PROFIL_SQUARE_COLOR + " TEXT DEFAULT ' #f44336',"
+            + PROFIL_SCROLL_SPEED + " INTEGER DEFAULT 5"
+            + ");";
+
+    private static final String CONTACT_CREATE = "CREATE TABLE " + CONTACT + "("
+            + CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + CONTACT_NAME + " TEXT DEFAULT 'unknown',"
+            + CONTACT_NUMBER + " TEXT DEFAULT '',"
+            + CONTACT_KEY + " INTEGER DEFAULT 0,"
+            + CONTACT_PROFIL + " INTEGER NOT NULL CONSTRAINT fkcontact_profil REFERENCES " + PROFIL + " (id) "
             + ");";
 
 
@@ -60,6 +78,7 @@ public class Profils extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(PROFIL_CREATE);
+        database.execSQL(CONTACT_CREATE);
     }
 
     @Override
@@ -68,6 +87,7 @@ public class Profils extends SQLiteOpenHelper {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + PROFIL);
+        db.execSQL("DROP TABLE IF EXISTS " + CONTACT);
         onCreate(db);
     }
 

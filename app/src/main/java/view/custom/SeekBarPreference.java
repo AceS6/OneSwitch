@@ -1,13 +1,14 @@
 package view.custom;
 
-	import data.Globale;
-import android.app.AlertDialog.Builder;
+	import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+
+import data.Globale;
 
 	public class SeekBarPreference extends DialogPreference {
 	        
@@ -25,15 +26,9 @@ import android.widget.SeekBar;
 	        layout.setMinimumWidth(400); 
 	        layout.setPadding(20, 20, 20, 20); 
 	        sensitivityLevel = new SeekBar(context); 
-	        if(this.getKey().equals("pointingline_size")){
-	        	sensitivityLevel.setMax(10);
-            }
-	        else{
-	        	sensitivityLevel.setMax(500);
-	        }
-	        
+            sensitivityLevel.setMax(10);
 	        sensitivityLevel.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)); 
-	        sensitivityLevel.setProgress(getPersistedInt(10));
+	        sensitivityLevel.setProgress(getPersistedInt(0));
 	        layout.addView(sensitivityLevel); 
 	        builder.setView(layout);
 	        //super.onPrepareDialogBuilder(builder); 
@@ -49,6 +44,9 @@ import android.widget.SeekBar;
 	            else if(this.getKey().equals("speed")){
 	            	Globale.engine.getProfil().setLineSpeed(sensitivityLevel.getProgress());
 	            }
+                else if(this.getKey().equals("scroll_speed")){
+                    Globale.engine.getProfil().setScrollSpeed(sensitivityLevel.getProgress());
+                }
 	            else if(this.getKey().equals("pointingsquare_height")){
 	            	Globale.engine.getProfil().setSquareHeight(sensitivityLevel.getProgress());
 	            }    

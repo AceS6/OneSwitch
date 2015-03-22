@@ -1,7 +1,5 @@
 package data;
 
-import android.view.WindowManager;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -20,12 +18,15 @@ public class OneSwitchData {
 
 	public final static String pointing_key="pref_pointing";
 
+    private String phoneNuber;
+
+
 
 
     // --------- CONSTRUCTOR
 	
 	public OneSwitchData(){
-        profil = new Profil(-2, "default", "Line Pointing", 70, 10, "#000000", "#000000", "#000000", 80, 50);
+        this.setDefaultProfil();
         serviceState=false;
         propertyChangeSupport = new PropertyChangeSupport(this);
 	}
@@ -78,5 +79,17 @@ public class OneSwitchData {
     public static String getSemiTransparentColor(String color){
         return color.substring(0,1)+"50"+color.substring(3,9);
     }
-	
+
+    public void setDefaultProfil(){
+        profil = new Profil("Default");
+    }
+
+    public String getPhoneNuber() {
+        return phoneNuber;
+    }
+
+    public void setPhoneNuber(String phoneNuber) {
+        this.phoneNuber = phoneNuber;
+    }
+
 }

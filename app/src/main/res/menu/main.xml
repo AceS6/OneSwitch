@@ -9,6 +9,12 @@
         android:showAsAction="always"
         android:title="Add Profil"
         android:icon="@drawable/ic_add_profil"/>
+    <item
+        android:id="@+id/swap_profil"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Swap Profil"
+        android:icon="@drawable/ic_swap_profil"/>
 
 </menu>
 

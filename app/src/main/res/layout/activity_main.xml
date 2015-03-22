@@ -71,12 +71,12 @@
             android:layout_marginBottom="15px"/>
 
         <ImageButton
-            android:id="@+id/profil"
+            android:id="@+id/contact_manager"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/profil"
-            android:onClick="profilSelection"
+            android:onClick="contactManager"
             android:background="@drawable/border_shadow"
             android:layout_marginBottom="15px"/>
 

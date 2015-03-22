@@ -27,15 +27,23 @@ public class OneSwitchService extends Service{
 
     public final static int LINE_POINTING=1, SQUARE_POINTING=2;
 
+    private static Binder binder;
+
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
-        return null;
+        return binder;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        binder = new Binder();
+    }
+
+    public class Binder extends android.os.Binder{
+        public OneSwitchService getService(){
+            return OneSwitchService.this;
+        }
     }
 
     @Override
@@ -67,14 +75,14 @@ public class OneSwitchService extends Service{
 
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        WindowManager windowmanager = (WindowManager) this.getSystemService(WINDOW_SERVICE);
+        final WindowManager windowmanager = (WindowManager) this.getSystemService(WINDOW_SERVICE);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
         params.gravity = Gravity.CENTER;
 
         View globalview = inflater.inflate(R.layout.service_optionpointing, null);
         windowmanager.addView(globalview, params);
-        globalview.setOnTouchListener(new ServiceEventListener(this, windowmanager, globalview));
+        globalview.setOnTouchListener(new ServiceEventListener(this, windowmanager, globalview, this));
 
     }
     public void startLinepointing(View v){
@@ -110,7 +118,7 @@ public class OneSwitchService extends Service{
                 paramsVLine.width=Globale.engine.getProfil().getLineSize();
                 verticalLine.setLayoutParams(paramsVLine);
                 verticalLine.invalidate();
-                globalview_line.setOnTouchListener(new OverlayTouchListener(windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height));
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height, this));
                 break;
 
             case OneSwitchService.SQUARE_POINTING:
@@ -121,7 +129,7 @@ public class OneSwitchService extends Service{
                 selectParams.width=Globale.engine.getProfil().getSquareWidth();
                 selectParams.height=Globale.engine.getProfil().getSquareHeight();
                 selection.setLayoutParams(selectParams);
-                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height));
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height, this));
                 break;
 
             default:
@@ -164,7 +172,7 @@ public class OneSwitchService extends Service{
                 paramsVLine.width=Globale.engine.getProfil().getLineSize();
                 verticalLine.setLayoutParams(paramsVLine);
                 verticalLine.invalidate();
-                globalview_line.setOnTouchListener(new OverlayTouchListener(windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height));
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height, binder.getService()));
                 break;
 
             case OneSwitchService.SQUARE_POINTING:
@@ -175,7 +183,7 @@ public class OneSwitchService extends Service{
                 selectParams.width=Globale.engine.getProfil().getSquareWidth();
                 selectParams.height=Globale.engine.getProfil().getSquareHeight();
                 selection.setLayoutParams(selectParams);
-                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height));
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height, binder.getService()));
                 break;
 
             default:
@@ -218,7 +226,7 @@ public class OneSwitchService extends Service{
                 paramsVLine.width=Globale.engine.getProfil().getLineSize();
                 verticalLine.setLayoutParams(paramsVLine);
                 verticalLine.invalidate();
-                globalview_line.setOnTouchListener(new OverlayTouchListener(windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height));
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height, binder.getService()));
                 break;
 
             case OneSwitchService.SQUARE_POINTING:
@@ -229,7 +237,7 @@ public class OneSwitchService extends Service{
                 selectParams.width=Globale.engine.getProfil().getSquareWidth();
                 selectParams.height=Globale.engine.getProfil().getSquareHeight();
                 selection.setLayoutParams(selectParams);
-                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height));
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height, binder.getService()));
                 break;
 
             default:

@@ -1,35 +1,31 @@
 package control.listener;
 
-import android.Manifest;
 import android.app.Instrumentation;
-import android.content.pm.PackageManager;
-import android.graphics.PixelFormat;
+import android.app.Service;
+import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.projeta.oneswitch.R;
 import com.robotium.solo.Solo;
 
-import java.io.IOException;
-
-import data.Globale;
+import data.actions.Click;
 import pointing.line.MoveHorizontalLine;
 import pointing.line.MoveVerticalLine;
-import service.OneSwitchService;
 
-public class OverlayTouchListener extends PointingSystem implements OnTouchListener, Runnable{
+public class OverlayTouchListener implements View.OnTouchListener,GestureDetector.OnGestureListener, Runnable{
 
+    private GestureDetector gestureDetector;
+    private Context c;
     private WindowManager windowmanager;
     private WindowManager.LayoutParams params;
     private View globalview;
     private View horizontalLine, verticalLine;
     private int state;
+    private Service s;
 
     public final int HORIZONTALMOVE=1, VERTICALMOVE=2, END=3;
 
@@ -39,7 +35,10 @@ public class OverlayTouchListener extends PointingSystem implements OnTouchListe
     private MoveVerticalLine verticalMove;
 
 
-    public OverlayTouchListener(WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, View horizontalLine, View verticalLine, int width, int height){
+    public OverlayTouchListener(Context c, WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, View horizontalLine, View verticalLine, int width, int height, Service s){
+        gestureDetector = new GestureDetector(c, this);
+        this.c=c;
+        this.s = s;
         this.windowmanager=windowmanager;
         this.globalview=globalview;
         this.horizontalLine=horizontalLine;
@@ -52,64 +51,98 @@ public class OverlayTouchListener extends PointingSystem implements OnTouchListe
         state=HORIZONTALMOVE;
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        // TODO Auto-generated method stub
-        v.performClick();
-        int action = event.getAction();
-
-        if (action == MotionEvent.ACTION_DOWN)
-        {
-            Log.d(TAG, "OnTouchButton");
-            if(state==HORIZONTALMOVE){
-                state=VERTICALMOVE;
-                horizontalMove.cancel(true);
-                verticalMove = new MoveVerticalLine(verticalLine);
-                verticalMove.execute();
-            }
-            else if(state==VERTICALMOVE){
-                verticalMove.cancel(true);
-                state=END;
-
-                RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
-                RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
-
-                Log.d(TAG, "width="+horizontalLine.getLeft());
-                Log.d(TAG, "height="+verticalLine.getTop());
-
-                int width = horizontalLine.getLeft();
-                int height = verticalLine.getTop();
-
-                windowmanager.removeView(globalview);
-                if (globalview.getContext().getPackageManager().checkPermission(Manifest.permission.INJECT_EVENTS, globalview.getContext().getPackageName()) == PackageManager.PERMISSION_GRANTED) {
-                    try {
-                        Runtime r = Runtime.getRuntime();
-                        r.exec("su -c input tap " + width + " " + height);
-
-                        if (Globale.engine.getServiceState()) {
-                            listen(windowmanager, globalview);
-                        }
-                    } catch (IOException e) {
-                        Toast.makeText(globalview.getContext(), "Permission not granted", Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
-                }
-                else{
-                    Toast.makeText(globalview.getContext(), "Permission not granted", Toast.LENGTH_LONG).show();
-                    listen(windowmanager, globalview);
-                }
-
-
-            }
-        }
-        return false;
-    }
 
     @Override
     public void run() {
         // TODO Auto-generated method stub
         Solo solo = new Solo(new Instrumentation());
         solo.clickOnScreen(horizontalLine.getLeft(), verticalLine.getTop());
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+
+        if(state == HORIZONTALMOVE)
+            horizontalMove.cancel(true);
+        if(state == VERTICALMOVE)
+            verticalMove.cancel(true);
+
+        return false;
+    }
+    @Override
+    public void onShowPress(MotionEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+
+        // TODO Auto-generated method stub
+        globalview.performClick();
+        Log.d(TAG, "OnTouchButton");
+        if (state == HORIZONTALMOVE) {
+            state = VERTICALMOVE;
+            verticalMove = new MoveVerticalLine(verticalLine);
+            verticalMove.execute();
+        } else if (state == VERTICALMOVE) {
+            state = END;
+
+            RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
+            RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
+
+            Log.d(TAG, "width=" + horizontalLine.getLeft());
+            Log.d(TAG, "height=" + verticalLine.getTop());
+
+            int width = horizontalLine.getLeft();
+            int height = verticalLine.getTop();
+
+            new Click(c,windowmanager, globalview, s).execute(width, height, Click.SHORT);
+
+        }
+        return false;
+    }
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+                            float distanceY) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                           float velocityY) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+        // TODO Auto-generated method stub
+        globalview.performClick();
+        Log.d(TAG, "OnLongTouchButton");
+        if (state == HORIZONTALMOVE) {
+            state = VERTICALMOVE;
+            verticalMove = new MoveVerticalLine(verticalLine);
+            verticalMove.execute();
+        } else if (state == VERTICALMOVE) {
+            state = END;
+
+            RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
+            RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
+
+            Log.d(TAG, "width=" + horizontalLine.getLeft());
+            Log.d(TAG, "height=" + verticalLine.getTop());
+
+            int width = horizontalLine.getLeft();
+            int height = verticalLine.getTop();
+
+            new Click(c, windowmanager, globalview, s).execute(width, height, Click.LONG);
+
+        }
     }
 
 }

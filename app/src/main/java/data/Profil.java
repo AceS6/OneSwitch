@@ -1,6 +1,8 @@
 package data;
 
-import data.db.ProfilsDAO;
+import android.graphics.Color;
+
+import java.util.HashMap;
 
 /**
  * Created by Alexis on 18/01/2015.
@@ -17,18 +19,34 @@ public class Profil {
     private int squareWidth, squareHeight;
     private int squarePauseTime;
     private float squareDensity;
+    private int scrollSpeed;
+    private HashMap<Integer, Contact> contacts;
 
-    public Profil(){
-        squarePauseTime = 1000;
-    }
-
-    public Profil(int id, String name){
-        this.id = id;
+    public Profil(String name){
+        this.id = -1;
         this.name = name;
-        squarePauseTime = 1000;
+        this.pointing = "Line Pointing";
+        this.lineSpeed = 5;
+        this.lineSize = 5;
+        this.lineColorH = "#000000";
+        this.lineColorV = "#000000";
+        this.squareColor = "#000000";
+        this.squareWidth = 5;
+        this.squareHeight = 5;
+        this.squarePauseTime = 1000;
+        this.scrollSpeed = 5;
+        this.contacts = new HashMap<Integer, Contact>();
+        this.contacts.put(1, new Contact("Sauray A.", "0647580076", 1));
+        this.contacts.put(2, new Contact("Cadoret A.", "0669365855", 2));
+        this.contacts.put(3, new Contact("undefined", "", 3));
+        this.contacts.put(4, new Contact("undefined", "", 4));
+        this.contacts.put(5, new Contact("undefined", "", 5));
+        this.contacts.put(6, new Contact("undefined", "", 6));
+        this.contacts.put(7, new Contact("undefined", "", 7));
+
     }
 
-    public Profil(int id, String name, String pointing, int lineSpeed, int lineSize, String lineColorH, String lineColorV, String squareColor, int squareWidth, int squareHeight){
+    public Profil(int id, String name, String pointing, int lineSpeed, int lineSize, String lineColorH, String lineColorV, String squareColor, int squareWidth, int squareHeight, int scrollSpeed, HashMap<Integer, Contact> contacts){
 
         this.id = id;
         this.name = name;
@@ -41,6 +59,8 @@ public class Profil {
         this.squareWidth = squareWidth;
         this.squareHeight = squareHeight;
         this.squarePauseTime = 1000;
+        this.scrollSpeed = scrollSpeed;
+        this.contacts = contacts;
 
     }
 
@@ -100,6 +120,17 @@ public class Profil {
         return this.lineColorV;
     }
 
+    public int getColorLineHInt(){
+        return Color.parseColor(this.lineColorH);
+    }
+    public int getColorLineVInt(){
+        return Color.parseColor(this.lineColorV);
+    }
+
+    public int getColorSquareInt(){
+        return Color.parseColor(this.squareColor);
+    }
+
     public void setLineSpeed(int speed){
         this.lineSpeed=speed;
     }
@@ -147,6 +178,23 @@ public class Profil {
 
     public int getSquarePauseTime(){
         return squarePauseTime;
+    }
+
+
+    public int getScrollSpeed() {
+        return scrollSpeed;
+    }
+
+    public void setScrollSpeed(int scrollSpeed) {
+        this.scrollSpeed = scrollSpeed;
+    }
+
+    public HashMap<Integer, Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(HashMap<Integer, Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public static String getHexaColor(int color){
