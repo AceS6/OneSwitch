@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:clickable="false"
+    android:focusable="false">
 
     <TextView
         android:id="@+id/key_listView"
@@ -9,7 +11,11 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:textSize="@dimen/key_listView"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:background="@drawable/rounded_textview"
+        android:clickable="false"
+        android:focusable="false"/>
 
     <TextView
         android:id="@+id/name_listView"
@@ -19,7 +25,10 @@
         android:textColor="#ff000000"
         android:textSize="@dimen/name_listView"
         android:textStyle="bold"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:layout_marginLeft="25px"
+        android:clickable="false"
+        android:focusable="false"/>
 
     <TextView
         android:id="@+id/number_listView"
@@ -28,6 +37,9 @@
         android:layout_below="@+id/name_listView"
         android:layout_toRightOf="@+id/key_listView"
         android:textSize="@dimen/number_listView"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:layout_marginLeft="25px"
+        android:clickable="false"
+        android:focusable="false"/>
 
 </RelativeLayout>

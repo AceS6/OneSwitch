@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
-		android:title="Préférences">
+	<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="preferences">
 		
 			<PreferenceCategory
-			    android:title="Système de pointage">
+			    android:title="OneSwitch Service">
 	    		    <ListPreference
 		        android:id="@+id/pref_pointing"
 		        android:key="pref_pointing"
@@ -13,9 +13,19 @@
 		        android:dialogTitle="@string/pointage_description"/>
 	    		    
 	    		    <view.custom.SeekBarPreference
-	    		        android:key="speed"
-        				android:title="@string/speed"
+	    		        android:key="scroll_speed"
+        				android:title="@string/scroll_speed"
 	    		        />
+
+                    <view.custom.ColorPickerPreferenceDialog
+                        android:key="service_color"
+                        android:title="@string/service_color"
+                        />
+
+                    <view.custom.SeekBarPreference
+                        android:key="service_opacity"
+                        android:title="@string/service_opacity"
+                        />
 	    
 	    </PreferenceCategory>
 	    
@@ -33,6 +43,11 @@
 	    		        android:key="pointingline_size"
         				android:title="@string/pointage_ligne_taille"
 	    		        />
+
+                    <view.custom.SeekBarPreference
+                    android:key="speed"
+                    android:title="@string/speed"
+                         />
 	    
 	    </PreferenceCategory>
 	    
@@ -41,21 +56,9 @@
 			    android:title="Square Pointing Configuration"> 		    
 	    		    <view.custom.ColorPickerPreferenceDialog
 	    		        android:key="pointingsquare_color"
-        				android:title="@string/square_couleur"/>    		   
-	    		    
-	    		    <view.custom.SeekBarPreference
-	    		        android:key="pointingsquare_width"
-        				android:title="@string/square_size_x"
-	    		        />
-	    		    
-	    		    <view.custom.SeekBarPreference
-	    		        android:key="pointingsquare_height"
-        				android:title="@string/square_size_y"
-	    		        />
+        				android:title="@string/square_couleur"/>
 	    
 	    </PreferenceCategory>
 
 
-
-
-</PreferenceScreen><!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/xml/preferences.xml -->
+</PreferenceScreen><!-- From: file:/home/sauray/Workspace/android/OneSwitch/app/src/main/res/xml/preferences.xml -->

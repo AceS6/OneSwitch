@@ -1,13 +1,14 @@
 package view.custom;
 
-import data.Globale;
-import view.custom.ColorPickerView.OnColorChangedListener;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.graphics.Color;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.util.Log;
+
+import data.Globale;
+import view.custom.ColorPickerView.OnColorChangedListener;
 
 public class ColorPickerPreferenceDialog extends DialogPreference implements OnColorChangedListener{
   private int mColor = 0;
@@ -31,6 +32,9 @@ public class ColorPickerPreferenceDialog extends DialogPreference implements OnC
       }
       else if(this.getKey().equals("pointingsquare_color")){
       	Globale.engine.getProfil().setColorSquare(mColor);
+      }
+      else if(this.getKey().equals("service_color")){
+          Globale.engine.getProfil().setServiceColor(mColor);
       }
     // Ou getSharedPreferences().edit().putInt(getKey(), mColor).commit();
     }

@@ -12,6 +12,8 @@
     <string name="pointage_description">Système de pointage par défaut</string>
     <string name="scroll_speed">Vitesse des transitions du menu</string>
     <string name="speed">Vitesse de déplacement du système de pointage</string>
+    <string name="service_color">Couleur de fond du service</string>
+    <string name="service_opacity">Opacité du fond</string>
 
     <string name="pointage_couleur_h">Couleur de la barre Horizontale</string>
     <string name="pointage_couleur_v">Couleur de la barre Verticale</string>
@@ -27,6 +29,8 @@
     <string name="accueil_1">Lancer le Service</string>
     <string name="accueil_2">Tester le pointage</string>
     <string name="accueil_3">Paramétrage du Service</string>
+    <string name="accueil_4">Gérer les contacts</string>
+
 
     <integer-array name="pointages_id">
         <item>1</item>

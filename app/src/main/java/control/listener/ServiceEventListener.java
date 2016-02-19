@@ -2,8 +2,10 @@ package control.listener;
 
 import android.app.Service;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -101,10 +103,10 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
     }
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        windowmanager.removeView(globalview);
-
         if(current == null){
-            OneSwitchService.startPointing(globalview, OneSwitchService.LINE_POINTING);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+            String pref_pointing = Globale.engine.getProfil().getPointing();
+            OneSwitchService.startPointing(globalview, OneSwitchService.getServiceId(pref_pointing));
         } else {
 
             if (current == i1) {
@@ -114,8 +116,8 @@ public class ServiceEventListener implements OnTouchListener, OnGestureListener,
                 Toast.makeText(c, "Home", Toast.LENGTH_SHORT).show();
                 new ActionClick(c,windowmanager, globalview, s).execute(KeyEvent.KEYCODE_HOME);
             } else if (current == i3) {
-                Toast.makeText(c, "Param", Toast.LENGTH_SHORT).show();
-                new ActionClick(c,windowmanager, globalview, s).execute(KeyEvent.KEYCODE_MENU);
+                Toast.makeText(c, "Switch App", Toast.LENGTH_SHORT).show();
+                new ActionClick(c,windowmanager, globalview, s).execute(KeyEvent.KEYCODE_APP_SWITCH);
             } else if (current == i4) {
                 Toast.makeText(c, "Phone", Toast.LENGTH_SHORT).show();
 

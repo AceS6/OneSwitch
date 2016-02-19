@@ -20,6 +20,8 @@ public class OneSwitchData {
 
     private String phoneNuber;
 
+    private int focus;
+
 
 
 
@@ -90,6 +92,14 @@ public class OneSwitchData {
 
     public void setPhoneNuber(String phoneNuber) {
         this.phoneNuber = phoneNuber;
+    }
+
+    public int getFocus() {
+        return focus;
+    }
+
+    public void setFocus(int focus) {
+        this.focus = focus;
     }
 
 }

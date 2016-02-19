@@ -22,7 +22,7 @@ public class ProfilsDAO {
     // ---------- ATTRIBUTES
 
     protected final static int VERSION = 1;
-    protected final static String NOM = "oneswitch2.db";
+    protected final static String NOM = "oneswitch3.db";
     protected SQLiteDatabase db;
     protected Profils handler;
     private Context context;
@@ -39,10 +39,10 @@ public class ProfilsDAO {
     public static final String PROFIL_LINE_SIZE = "linesize";
     public static final String PROFIL_LINE_COLORH = "linecolorh";
     public static final String PROFIL_LINE_COLORV = "linecolorv";
-    public static final String PROFIL_SQUARE_WIDTH = "squarewidth";
-    public static final String PROFIL_SQUARE_HEIGHT = "squareheight";
     public static final String PROFIL_SQUARE_COLOR = "squarecolor";
     public static final String PROFIL_SCROLL_SPEED = "scrollspeed";
+    public static final String PROFIL_SERVICE_COLOR = "servicecolor";
+    public static final String PROFIL_SERVICE_OPACITY = "servicespeed";
 
 
     // ----- CONTACT
@@ -86,11 +86,11 @@ public class ProfilsDAO {
     public ArrayList<Profil> getProfils(){
         ArrayList<Profil> ret = new ArrayList<Profil>();
         Profil tmp = null;
-        int tmpId, tmpLineSpeed, tmpLineSize, tmpSquareWidth, tmpSquareHeight, tmpScrollSpeed;
-        String tmpName, tmpPointing, tmpLineColorH, tmpLineColorV, tmpSquareColor;
+        int tmpId, tmpLineSpeed, tmpLineSize, tmpSquareWidth, tmpSquareHeight, tmpScrollSpeed, tmpOpacity;
+        String tmpName, tmpPointing, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpColor;
         HashMap<Integer, Contact> tmpContacts = new HashMap<Integer, Contact>();
 
-        Cursor c = db.query(PROFIL, new String[] {PROFIL_ID, PROFIL_NAME, PROFIL_POINTING, PROFIL_LINE_SPEED, PROFIL_LINE_SIZE, PROFIL_LINE_COLORH, PROFIL_LINE_COLORV, PROFIL_SQUARE_WIDTH, PROFIL_SQUARE_HEIGHT, PROFIL_SQUARE_COLOR, PROFIL_SCROLL_SPEED}, null, null, null, null, null);
+        Cursor c = db.query(PROFIL, new String[] {PROFIL_ID, PROFIL_NAME, PROFIL_POINTING, PROFIL_LINE_SPEED, PROFIL_LINE_SIZE, PROFIL_LINE_COLORH, PROFIL_LINE_COLORV, PROFIL_SQUARE_COLOR, PROFIL_SCROLL_SPEED, PROFIL_SERVICE_COLOR, PROFIL_SERVICE_OPACITY}, null, null, null, null, null);
         while(c.moveToNext()){
 
             tmpId = c.getInt(0);
@@ -100,13 +100,13 @@ public class ProfilsDAO {
             tmpLineSize = c.getInt(4);
             tmpLineColorH = c.getString(5);
             tmpLineColorV = c.getString(6);
-            tmpSquareWidth = c.getInt(7);
-            tmpSquareHeight = c.getInt(8);
-            tmpSquareColor = c.getString(9);
-            tmpScrollSpeed = c.getInt(10);
+            tmpSquareColor = c.getString(7);
+            tmpScrollSpeed = c.getInt(8);
+            tmpColor = c.getString(9);
+            tmpOpacity = c.getInt(10);
             tmpContacts = this.getContacts(tmpId);
 
-            tmp = new Profil(tmpId, tmpName, tmpPointing, tmpLineSpeed, tmpLineSize, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpSquareWidth, tmpSquareHeight, tmpScrollSpeed, tmpContacts);
+            tmp = new Profil(tmpId, tmpName, tmpPointing, tmpLineSpeed, tmpLineSize, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpScrollSpeed, tmpColor, tmpOpacity, tmpContacts);
             ret.add(tmp);
         }
         c.close();
@@ -117,11 +117,11 @@ public class ProfilsDAO {
     public Profil getProfil(int idProfil){
 
         Profil ret = null;
-        int tmpId, tmpLineSpeed, tmpLineSize, tmpSquareWidth, tmpSquareHeight, tmpScrollSpeed;
-        String tmpName, tmpPointing, tmpLineColorH, tmpLineColorV, tmpSquareColor;
+        int tmpId, tmpLineSpeed, tmpLineSize, tmpSquareWidth, tmpSquareHeight, tmpScrollSpeed, tmpOpacity;
+        String tmpName, tmpPointing, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpColor;
         HashMap<Integer, Contact> tmpContacts = new HashMap<Integer, Contact>();
 
-        Cursor c = db.query(PROFIL, new String[] {PROFIL_ID, PROFIL_NAME, PROFIL_POINTING, PROFIL_LINE_SPEED, PROFIL_LINE_SIZE, PROFIL_LINE_COLORH, PROFIL_LINE_COLORV, PROFIL_SQUARE_WIDTH, PROFIL_SQUARE_HEIGHT, PROFIL_SQUARE_COLOR, PROFIL_SCROLL_SPEED}, PROFIL_ID + " LIKE '" + idProfil + "'", null, null, null, null);
+        Cursor c = db.query(PROFIL, new String[] {PROFIL_ID, PROFIL_NAME, PROFIL_POINTING, PROFIL_LINE_SPEED, PROFIL_LINE_SIZE, PROFIL_LINE_COLORH, PROFIL_LINE_COLORV, PROFIL_SQUARE_COLOR, PROFIL_SCROLL_SPEED,  PROFIL_SERVICE_COLOR, PROFIL_SERVICE_OPACITY}, PROFIL_ID + " LIKE '" + idProfil + "'", null, null, null, null);
         while(c.moveToNext()){
 
             tmpId = c.getInt(0);
@@ -131,13 +131,14 @@ public class ProfilsDAO {
             tmpLineSize = c.getInt(4);
             tmpLineColorH = c.getString(5);
             tmpLineColorV = c.getString(6);
-            tmpSquareWidth = c.getInt(7);
-            tmpSquareHeight = c.getInt(8);
-            tmpSquareColor = c.getString(9);
-            tmpScrollSpeed = c.getInt(10);
+            tmpSquareColor = c.getString(7);
+            tmpScrollSpeed = c.getInt(8);
+            tmpColor = c.getString(9);
+            tmpOpacity = c.getInt(10);
             tmpContacts = this.getContacts(tmpId);
 
-            ret = new Profil(tmpId, tmpName, tmpPointing, tmpLineSpeed, tmpLineSize, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpSquareWidth, tmpSquareHeight, tmpScrollSpeed, tmpContacts);
+            ret = new Profil(tmpId, tmpName, tmpPointing, tmpLineSpeed, tmpLineSize, tmpLineColorH, tmpLineColorV, tmpSquareColor, tmpScrollSpeed, tmpColor, tmpOpacity, tmpContacts);
+
         }
         c.close();
 
@@ -157,10 +158,10 @@ public class ProfilsDAO {
             values.put(PROFIL_LINE_SIZE, p.getLineSize());
             values.put(PROFIL_LINE_COLORH, p.getColorLineH());
             values.put(PROFIL_LINE_COLORV, p.getColorLineV());
-            values.put(PROFIL_SQUARE_WIDTH, p.getSquareWidth());
-            values.put(PROFIL_SQUARE_HEIGHT, p.getSquareHeight());
             values.put(PROFIL_SQUARE_COLOR, p.getColorSquare());
             values.put(PROFIL_SCROLL_SPEED, p.getScrollSpeed());
+            values.put(PROFIL_SERVICE_COLOR, p.getServiceColor());
+            values.put(PROFIL_SERVICE_OPACITY, p.getServiceOpacity());
 
 
             ret = db.insert(PROFIL, null, values);
@@ -187,10 +188,10 @@ public class ProfilsDAO {
         values.put(PROFIL_LINE_SIZE , p.getLineSize());
         values.put(PROFIL_LINE_COLORH , p.getColorLineH());
         values.put(PROFIL_LINE_COLORV , p.getColorLineV());
-        values.put(PROFIL_SQUARE_WIDTH , p.getSquareWidth());
-        values.put(PROFIL_SQUARE_HEIGHT , p.getSquareHeight());
         values.put(PROFIL_SQUARE_COLOR , p.getColorSquare());
         values.put(PROFIL_SCROLL_SPEED, p.getScrollSpeed());
+        values.put(PROFIL_SERVICE_COLOR , p.getServiceColor());
+        values.put(PROFIL_SERVICE_OPACITY, p.getServiceOpacity());
 
         this.saveContacts(p);
 

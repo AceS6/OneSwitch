@@ -1,57 +1,62 @@
 package control.listener;
 
 import android.app.Service;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+
+import com.projeta.oneswitch.R;
 
 import data.Globale;
-import pointing.square.MoveHorizontalSquareHalf;
-import pointing.square.MoveHorizontalSquareQuarter;
-import pointing.square.MoveVerticalSquareHalf;
-import pointing.square.MoveVerticalSquareQuarter;
+import data.actions.Click;
+import pointing.square.MoveHorizontalSquare;
+import pointing.square.MoveVerticalSquare;
+import service.OneSwitchService;
 
 public class SquareOverlayTouchListener implements OnTouchListener{
 
 	private WindowManager windowmanager;
 	private WindowManager.LayoutParams params;
 	private View globalview;
-	private View selection;
-	private int state;
-	private int iconSize, margin;
     private Service s;
-	
-	public final int HALF=1, QUARTER=2;;
-	
-	private final String TAG="OverlayTouchListener";
-	
-	private MoveVerticalSquareHalf verticalMove;
-	private MoveHorizontalSquareHalf horizontalMove;
-	
-	private MoveVerticalSquareQuarter verticalMove_quarter;
-	private MoveHorizontalSquareQuarter horizontalMove_quarter;
-	
-	public SquareOverlayTouchListener(WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, View selection, int width, int height, Service s){
+
+	private MoveVerticalSquare verticalMove;
+	private MoveHorizontalSquare horizontalMove;
+
+    private View square;
+
+	public SquareOverlayTouchListener(WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, Service s){
 		this.windowmanager=windowmanager;
 		this.globalview=globalview;
-		this.selection=selection;
 		this.params=params;
 		this.s = s;
         windowmanager.addView(globalview, params);
-		verticalMove=new MoveVerticalSquareHalf(selection, horizontalMove, 1, height/2);
-		horizontalMove=new MoveHorizontalSquareHalf(selection, verticalMove, 1,width/2);
+
+        square = globalview.findViewById(R.id.square_selection);
+        square.setBackgroundColor(Globale.engine.getProfil().getColorLineHInt());
+        RelativeLayout.LayoutParams paramSquare = (android.widget.RelativeLayout.LayoutParams) square.getLayoutParams();
+        paramSquare.topMargin=0;
+        paramSquare.leftMargin=0;
+        paramSquare.bottomMargin=Globale.engine.getHeight()/2;
+        paramSquare.rightMargin=Globale.engine.getWidth()/2;
+		verticalMove=new MoveVerticalSquare(square, horizontalMove, 1);
+		horizontalMove=new MoveHorizontalSquare(square, verticalMove, 1);
 		horizontalMove.execute();
-		
-		this.iconSize=(int) (32*Globale.engine.getProfil().getDensity());
-		margin=iconSize/2;
-		this.state=HALF;
 	}
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
         // TODO Auto-generated method stub
-        return false;
+            horizontalMove.cancel(true);
+            verticalMove.cancel(true);
+        OneSwitchService.startPointing(globalview, OneSwitchService.LINE_POINTING, new int[]{horizontalMove.getLeft(), horizontalMove.getRight(), verticalMove.getTop(), verticalMove.getBottom()});
+        return true;
     }
 
 }

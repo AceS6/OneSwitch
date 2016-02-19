@@ -63,8 +63,7 @@ public class OneSwitchService extends Service{
 
         Globale.engine.getProfil().setLineSpeed(sharedPref.getInt("speed", 10));
 
-        Globale.engine.getProfil().setSquareWidth(sharedPref.getInt("pointingsquare_width", 100));
-        Globale.engine.getProfil().setSquareHeight(sharedPref.getInt("pointingsquare_height", 100));
+        Globale.engine.getProfil().setPointing(sharedPref.getString("pref_pointing", "Line Pointing"));
 
         this.listen();
 
@@ -118,7 +117,7 @@ public class OneSwitchService extends Service{
                 paramsVLine.width=Globale.engine.getProfil().getLineSize();
                 verticalLine.setLayoutParams(paramsVLine);
                 verticalLine.invalidate();
-                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height, this));
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, new int[]{0, 0, 0, 0}, this));
                 break;
 
             case OneSwitchService.SQUARE_POINTING:
@@ -126,10 +125,10 @@ public class OneSwitchService extends Service{
                 View selection = globalview_square.findViewById(R.id.square_selection);
                 selection.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorSquare()));
                 LayoutParams selectParams = selection.getLayoutParams();
-                selectParams.width=Globale.engine.getProfil().getSquareWidth();
-                selectParams.height=Globale.engine.getProfil().getSquareHeight();
+                selectParams.width=width/2;
+                selectParams.height=height/2;
                 selection.setLayoutParams(selectParams);
-                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height, this));
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, this));
                 break;
 
             default:
@@ -139,6 +138,114 @@ public class OneSwitchService extends Service{
     }
 
     public static void startPointing(View v){
+        startPointing(v, new int[]{0, 0, 0, 0});
+    }
+
+    public static void startPointing(View v, int[] viewParameters){
+        WindowManager windowmanager;
+        LayoutInflater inflater = LayoutInflater.from(v.getContext());
+
+        windowmanager = (WindowManager) v.getContext().getSystemService(WINDOW_SERVICE);
+        SharedPreferences sharedPref;
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+        String pointing = sharedPref.getString(OneSwitchData.pointing_key, v.getContext().getResources().getString(R.string.linepointing));
+        int id = OneSwitchService.getServiceId(pointing);
+
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
+        params.gravity = Gravity.CENTER;
+
+        switch(id){
+
+            case OneSwitchService.LINE_POINTING:
+                View globalview_line = inflater.inflate(R.layout.service_linepointing, null);
+                View horizontalLine = globalview_line.findViewById(R.id.horizontal_line);
+                horizontalLine.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorLineH()));
+                LayoutParams paramsHLine = horizontalLine.getLayoutParams();
+                paramsHLine.height=Globale.engine.getProfil().getLineSize();
+                horizontalLine.setLayoutParams(paramsHLine);
+                horizontalLine.invalidate();
+
+                View verticalLine = globalview_line.findViewById(R.id.vertical_line);
+                verticalLine.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorLineV()));
+                LayoutParams paramsVLine = verticalLine.getLayoutParams();
+                paramsVLine.width=Globale.engine.getProfil().getLineSize();
+                verticalLine.setLayoutParams(paramsVLine);
+                verticalLine.invalidate();
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, viewParameters, binder.getService()));
+                break;
+
+            case OneSwitchService.SQUARE_POINTING:
+                View globalview_square = inflater.inflate(R.layout.service_squarepointing, null);
+                View selection = globalview_square.findViewById(R.id.square_selection);
+                selection.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorSquare()));
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, binder.getService()));
+                break;
+
+            default:
+
+                break;
+
+        }
+    }
+    public static void startPointing(View v, int id){
+        startPointing(v, id, new int[]{0, 0, 0, 0});
+    }
+
+    public static void startPointing(View v, int id, int[] viewParameters){
+
+        WindowManager windowmanager;
+        LayoutInflater inflater = LayoutInflater.from(v.getContext());
+
+        windowmanager = (WindowManager) v.getContext().getSystemService(WINDOW_SERVICE);
+        windowmanager.removeViewImmediate(v);
+        SharedPreferences sharedPref;
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+        String pointing = sharedPref.getString(OneSwitchData.pointing_key, v.getContext().getResources().getString(R.string.linepointing));
+
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
+        params.gravity = Gravity.CENTER;
+
+        switch(id){
+
+            case OneSwitchService.LINE_POINTING:
+                View globalview_line = inflater.inflate(R.layout.service_linepointing, null);
+                View horizontalLine = globalview_line.findViewById(R.id.horizontal_line);
+                horizontalLine.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorLineH()));
+                LayoutParams paramsHLine = horizontalLine.getLayoutParams();
+                paramsHLine.height=Globale.engine.getProfil().getLineSize();
+                horizontalLine.setLayoutParams(paramsHLine);
+                horizontalLine.invalidate();
+
+                View verticalLine = globalview_line.findViewById(R.id.vertical_line);
+                verticalLine.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorLineV()));
+                LayoutParams paramsVLine = verticalLine.getLayoutParams();
+                paramsVLine.width=Globale.engine.getProfil().getLineSize();
+                verticalLine.setLayoutParams(paramsVLine);
+                verticalLine.invalidate();
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, viewParameters, binder.getService()));
+                break;
+
+            case OneSwitchService.SQUARE_POINTING:
+                View globalview_square = inflater.inflate(R.layout.service_squarepointing, null);
+                View selection = globalview_square.findViewById(R.id.square_selection);
+                selection.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorSquare()));
+                LayoutParams selectParams = selection.getLayoutParams();
+                selectParams.width= Globale.engine.getWidth();
+                selectParams.height=Globale.engine.getHeight();
+                selection.setLayoutParams(selectParams);
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, binder.getService()));
+                break;
+
+            default:
+
+                break;
+
+        }
+    }
+
+    public static void startTestPointing(View v){
 
         int width = Globale.engine.getWidth();
         int height = Globale.engine.getHeight();
@@ -172,7 +279,7 @@ public class OneSwitchService extends Service{
                 paramsVLine.width=Globale.engine.getProfil().getLineSize();
                 verticalLine.setLayoutParams(paramsVLine);
                 verticalLine.invalidate();
-                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height, binder.getService()));
+                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, new int[]{0,0,0,0}, binder.getService()));
                 break;
 
             case OneSwitchService.SQUARE_POINTING:
@@ -180,64 +287,10 @@ public class OneSwitchService extends Service{
                 View selection = globalview_square.findViewById(R.id.square_selection);
                 selection.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorSquare()));
                 LayoutParams selectParams = selection.getLayoutParams();
-                selectParams.width=Globale.engine.getProfil().getSquareWidth();
-                selectParams.height=Globale.engine.getProfil().getSquareHeight();
+               /* selectParams.width=Globale.engine.getProfil().getSquareWidth();
+                selectParams.height=Globale.engine.getProfil().getSquareHeight();*/
                 selection.setLayoutParams(selectParams);
-                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height, binder.getService()));
-                break;
-
-            default:
-
-                break;
-
-        }
-    }
-
-    public static void startPointing(View v, int id){
-
-        int width = Globale.engine.getWidth();
-        int height = Globale.engine.getHeight();
-        WindowManager windowmanager;
-        LayoutInflater inflater = LayoutInflater.from(v.getContext());
-
-        windowmanager = (WindowManager) v.getContext().getSystemService(WINDOW_SERVICE);
-        SharedPreferences sharedPref;
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
-        String pointing = sharedPref.getString(OneSwitchData.pointing_key, v.getContext().getResources().getString(R.string.linepointing));
-
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.TYPE_PHONE, 0, PixelFormat.TRANSLUCENT);
-        params.gravity = Gravity.CENTER;
-
-        switch(id){
-
-            case OneSwitchService.LINE_POINTING:
-                View globalview_line = inflater.inflate(R.layout.service_linepointing, null);
-                View horizontalLine = globalview_line.findViewById(R.id.horizontal_line);
-                horizontalLine.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorLineH()));
-                LayoutParams paramsHLine = horizontalLine.getLayoutParams();
-                paramsHLine.height=Globale.engine.getProfil().getLineSize();
-                horizontalLine.setLayoutParams(paramsHLine);
-                horizontalLine.invalidate();
-
-                View verticalLine = globalview_line.findViewById(R.id.vertical_line);
-                verticalLine.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorLineV()));
-                LayoutParams paramsVLine = verticalLine.getLayoutParams();
-                paramsVLine.width=Globale.engine.getProfil().getLineSize();
-                verticalLine.setLayoutParams(paramsVLine);
-                verticalLine.invalidate();
-                globalview_line.setOnTouchListener(new OverlayTouchListener(v.getContext(),windowmanager, globalview_line, params, horizontalLine, verticalLine, width, height, binder.getService()));
-                break;
-
-            case OneSwitchService.SQUARE_POINTING:
-                View globalview_square = inflater.inflate(R.layout.service_squarepointing, null);
-                View selection = globalview_square.findViewById(R.id.square_selection);
-                selection.setBackgroundColor(Color.parseColor(Globale.engine.getProfil().getColorSquare()));
-                LayoutParams selectParams = selection.getLayoutParams();
-                selectParams.width=Globale.engine.getProfil().getSquareWidth();
-                selectParams.height=Globale.engine.getProfil().getSquareHeight();
-                selection.setLayoutParams(selectParams);
-                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, selection, width, height, binder.getService()));
+                globalview_square.setOnTouchListener(new SquareOverlayTouchListener(windowmanager, globalview_square, params, binder.getService()));
                 break;
 
             default:

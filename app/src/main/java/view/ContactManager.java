@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.projeta.oneswitch.R;
 
@@ -30,11 +29,10 @@ public class ContactManager extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setTitle(Globale.engine.getProfil().getName());
         this.cAdapter = new ContactAdapter(this, Globale.engine.getProfil().getContacts());
         getListView().setAdapter(cAdapter);
         registerForContextMenu(getListView());
-        Toast.makeText(this, "nb : " + Globale.engine.getProfil().getContacts().size(), Toast.LENGTH_LONG).show();
     }
 
     @Override

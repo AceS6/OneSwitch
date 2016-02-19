@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="true"
+    android:scrollbars = "vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -70,19 +78,26 @@
             android:background="@drawable/border_shadow"
             android:layout_marginBottom="15px"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/accueil_4"
+            android:id="@+id/textView4" />
+
         <ImageButton
-            android:id="@+id/profil"
+            android:id="@+id/contact_manager"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/profil"
-            android:onClick="profilSelection"
+            android:onClick="contactManager"
             android:background="@drawable/border_shadow"
             android:layout_marginBottom="15px"/>
 
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>
 
-
-<!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/home/sauray/Workspace/android/OneSwitch/app/src/main/res/layout/activity_main.xml -->

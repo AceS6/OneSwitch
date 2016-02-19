@@ -11,20 +11,24 @@ public class MoveVerticalLine extends AsyncTask<Void,Void,Void>{
     private View line;
     private int i;
     private boolean toRight;
+    private int[] maxPos;
 
-    public MoveVerticalLine(View line){
+    public MoveVerticalLine(View line, int[] maxPos){
         Log.d("", "Constructor vertical line");
         this.line=line;
         this.toRight=true;
-        i=0;
+        i=maxPos[0];
+        this.maxPos = maxPos;
+        Log.d("left="+maxPos[0], "MoveVerticalLine");
+        Log.d("right="+maxPos[1], "MoveVerticalLine");
     }
 
     @Override
     protected Void doInBackground(Void... params) {
         // TODO Auto-generated method stub
         Log.d("", "inbackground");
-        int right = Globale.engine.getWidth();
-        int left = 0;
+        int left = maxPos[0];
+        int right = Globale.engine.getWidth() - maxPos[1];
         while(!this.isCancelled()) {
             if (toRight) {
                 while (i < right && !this.isCancelled()) {
@@ -34,6 +38,7 @@ public class MoveVerticalLine extends AsyncTask<Void,Void,Void>{
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
+                        break;
                     }
                 }
                 toRight = false;
@@ -46,6 +51,7 @@ public class MoveVerticalLine extends AsyncTask<Void,Void,Void>{
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
+                        break;
                     }
                 }
                 toRight = true;
@@ -63,5 +69,9 @@ public class MoveVerticalLine extends AsyncTask<Void,Void,Void>{
         if(toRight) i++;
         else i--;
         Log.d("moveverticalline", "left margin="+i);
+    }
+
+    public int getLeft(){
+        return i;
     }
 }

@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.projeta.oneswitch.R;
 
@@ -138,7 +137,6 @@ public class MainActivity extends Activity implements PropertyChangeListener {
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
         float density = metrics.density;
-        Globale.engine.getProfil().setDensity(density);
 
 
         Intent intent = new Intent(MainActivity.this, OneSwitchService.class);
@@ -151,8 +149,7 @@ public class MainActivity extends Activity implements PropertyChangeListener {
 
     public void startPointing(View v){
         Log.d("start", "start pointing");
-        OneSwitchService.startPointing(v);
-        Toast.makeText(this, "Lancement du Test du systeme de pointage : "+ Globale.engine.getProfil().getPointing(), Toast.LENGTH_LONG).show();
+        OneSwitchService.startTestPointing(v);
     }
 
     public void startService(View v){

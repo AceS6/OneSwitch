@@ -30,9 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_alignParentBottom="true"
-        android:text="Guess What"
+        android:text="Exit"
         android:layout_toRightOf="@+id/button2"
         android:visibility="invisible"/>
 
 </RelativeLayout>
-<!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/layout/action_selection.xml -->
+<!-- From: file:/home/sauray/Workspace/android/OneSwitch/app/src/main/res/layout/action_selection.xml -->

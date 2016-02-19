@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.robotium.solo.Solo;
 
+import data.Globale;
 import data.actions.Click;
 import pointing.line.MoveHorizontalLine;
 import pointing.line.MoveVerticalLine;
@@ -33,9 +34,10 @@ public class OverlayTouchListener implements View.OnTouchListener,GestureDetecto
 
     private MoveHorizontalLine horizontalMove;
     private MoveVerticalLine verticalMove;
+    private int[] viewParameters;
 
 
-    public OverlayTouchListener(Context c, WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, View horizontalLine, View verticalLine, int width, int height, Service s){
+    public OverlayTouchListener(Context c, WindowManager windowmanager, View globalview, WindowManager.LayoutParams params, View horizontalLine, View verticalLine, int[] viewParameters, Service s){
         gestureDetector = new GestureDetector(c, this);
         this.c=c;
         this.s = s;
@@ -45,8 +47,28 @@ public class OverlayTouchListener implements View.OnTouchListener,GestureDetecto
         this.verticalLine=verticalLine;
         this.params=params;
 
+        this.viewParameters = viewParameters;
+
+        RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
+        RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
+
+        paramsH.leftMargin = (viewParameters[0]);
+        paramsH.rightMargin = (viewParameters[1]);
+        paramsH.topMargin = (viewParameters[2]);
+        paramsH.bottomMargin = (viewParameters[3]);
+
+        paramsV.leftMargin = (viewParameters[0]);
+        paramsV.rightMargin = (viewParameters[1]);
+        paramsV.topMargin = (viewParameters[2]);
+        paramsV.bottomMargin = (viewParameters[3]);
+
+        Log.d(paramsH.leftMargin+"", "leftMargin(overlay)");
+        Log.d(paramsH.rightMargin+"", "rightMargin(overlay)");
+        Log.d(paramsH.topMargin+"", "topMargin(overlay)");
+        Log.d(paramsH.bottomMargin+"", "bottomMargin(overlay)");
+
         windowmanager.addView(globalview, params);
-        horizontalMove = new MoveHorizontalLine(horizontalLine);
+        horizontalMove = new MoveHorizontalLine(horizontalLine, new int[]{viewParameters[2], viewParameters[3]});
         horizontalMove.execute();
         state=HORIZONTALMOVE;
     }
@@ -87,22 +109,21 @@ public class OverlayTouchListener implements View.OnTouchListener,GestureDetecto
         Log.d(TAG, "OnTouchButton");
         if (state == HORIZONTALMOVE) {
             state = VERTICALMOVE;
-            verticalMove = new MoveVerticalLine(verticalLine);
+            verticalMove = new MoveVerticalLine(verticalLine, new int[]{viewParameters[0], viewParameters[1]});
             verticalMove.execute();
         } else if (state == VERTICALMOVE) {
             state = END;
 
-            RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
-            RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
+            int width = verticalMove.getLeft();
+            int height = horizontalMove.getTop();
 
-            Log.d(TAG, "width=" + horizontalLine.getLeft());
-            Log.d(TAG, "height=" + verticalLine.getTop());
-
-            int width = horizontalLine.getLeft();
-            int height = verticalLine.getTop();
-
-            new Click(c,windowmanager, globalview, s).execute(width, height, Click.SHORT);
-
+            Log.d(TAG, "width=" + width);
+            Log.d(TAG, "height=" + height);
+            if(Globale.engine.getServiceState()){
+                new Click(c,windowmanager, globalview, s).execute(width, height, Click.SHORT);
+            } else {
+                windowmanager.removeViewImmediate(globalview);
+            }
         }
         return false;
     }
@@ -126,21 +147,22 @@ public class OverlayTouchListener implements View.OnTouchListener,GestureDetecto
         Log.d(TAG, "OnLongTouchButton");
         if (state == HORIZONTALMOVE) {
             state = VERTICALMOVE;
-            verticalMove = new MoveVerticalLine(verticalLine);
+            verticalMove = new MoveVerticalLine(verticalLine, new int[]{viewParameters[2], viewParameters[3]});
             verticalMove.execute();
         } else if (state == VERTICALMOVE) {
             state = END;
 
-            RelativeLayout.LayoutParams paramsH = (RelativeLayout.LayoutParams) horizontalLine.getLayoutParams();
-            RelativeLayout.LayoutParams paramsV = (RelativeLayout.LayoutParams) verticalLine.getLayoutParams();
+            int width = verticalMove.getLeft();
+            int height = horizontalMove.getTop();
 
-            Log.d(TAG, "width=" + horizontalLine.getLeft());
-            Log.d(TAG, "height=" + verticalLine.getTop());
+            Log.d(TAG, "width=" + width);
+            Log.d(TAG, "height=" + height);
 
-            int width = horizontalLine.getLeft();
-            int height = verticalLine.getTop();
-
-            new Click(c, windowmanager, globalview, s).execute(width, height, Click.LONG);
+            if(Globale.engine.getServiceState()){
+                new Click(c,windowmanager, globalview, s).execute(width, height, Click.LONG);
+            } else {
+                windowmanager.removeView(globalview);
+            }
 
         }
     }

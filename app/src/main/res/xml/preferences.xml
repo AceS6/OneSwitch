@@ -3,7 +3,7 @@
         android:title="preferences">
 		
 			<PreferenceCategory
-			    android:title="Système de pointage">
+			    android:title="OneSwitch Service">
 	    		    <ListPreference
 		        android:id="@+id/pref_pointing"
 		        android:key="pref_pointing"
@@ -16,6 +16,16 @@
 	    		        android:key="scroll_speed"
         				android:title="@string/scroll_speed"
 	    		        />
+
+                    <view.custom.ColorPickerPreferenceDialog
+                        android:key="service_color"
+                        android:title="@string/service_color"
+                        />
+
+                    <view.custom.SeekBarPreference
+                        android:key="service_opacity"
+                        android:title="@string/service_opacity"
+                        />
 	    
 	    </PreferenceCategory>
 	    
@@ -46,17 +56,7 @@
 			    android:title="Square Pointing Configuration"> 		    
 	    		    <view.custom.ColorPickerPreferenceDialog
 	    		        android:key="pointingsquare_color"
-        				android:title="@string/square_couleur"/>    		   
-	    		    
-	    		    <view.custom.SeekBarPreference
-	    		        android:key="pointingsquare_width"
-        				android:title="@string/square_size_x"
-	    		        />
-	    		    
-	    		    <view.custom.SeekBarPreference
-	    		        android:key="pointingsquare_height"
-        				android:title="@string/square_size_y"
-	    		        />
+        				android:title="@string/square_couleur"/>
 	    
 	    </PreferenceCategory>
 

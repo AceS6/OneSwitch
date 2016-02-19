@@ -1,5 +1,5 @@
-C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\classes\debug
-C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-5b805786d567e388540b513ebbb77f39406531c5.jar
-C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-4cbb91efc87c18e188dae103a357be43d12c4fe7.jar
-C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\robotium-solo-5.2.1-dfc91a2508c61ee58603812ec1f00781dddf0e93.jar
-C:\Users\Alexis\Documents\IUT\OneSwitch\OneSwitch\app\build\intermediates\pre-dexed\debug\classes-6c9b7d4f5aabe0d09b62e04b34a8070c46271158.jar
+/home/sauray/Workspace/android/OneSwitch/app/build/intermediates/classes/debug
+/home/sauray/Workspace/android/OneSwitch/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-c7e0cd5006646d3a18baf84776803d6c53786bcb.jar
+/home/sauray/Workspace/android/OneSwitch/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-a0f5375f3f392178a7d07cb62caf76ea0a945fb4.jar
+/home/sauray/Workspace/android/OneSwitch/app/build/intermediates/pre-dexed/debug/robotium-solo-5.2.1-a3321167c54cd1f552b4610750abdcb870e29c7a.jar
+/home/sauray/Workspace/android/OneSwitch/app/build/intermediates/pre-dexed/debug/classes-4a4ce9f5318c29eede3954c84115ea45194b3452.jar

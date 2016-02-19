@@ -16,9 +16,8 @@ public class Profil {
     private int lineSize;
     private String lineColorH, lineColorV;
     private String squareColor;
-    private int squareWidth, squareHeight;
-    private int squarePauseTime;
-    private float squareDensity;
+    private int serviceOpacity;
+    private String serviceColor;
     private int scrollSpeed;
     private HashMap<Integer, Contact> contacts;
 
@@ -31,13 +30,12 @@ public class Profil {
         this.lineColorH = "#000000";
         this.lineColorV = "#000000";
         this.squareColor = "#000000";
-        this.squareWidth = 5;
-        this.squareHeight = 5;
-        this.squarePauseTime = 1000;
         this.scrollSpeed = 5;
+        this.serviceColor = "#BBDEFB";
+        this.serviceOpacity = 5;
         this.contacts = new HashMap<Integer, Contact>();
-        this.contacts.put(1, new Contact("Sauray A.", "0647580076", 1));
-        this.contacts.put(2, new Contact("Cadoret A.", "0669365855", 2));
+        this.contacts.put(1, new Contact("undefined", "", 1));
+        this.contacts.put(2, new Contact("undefined", "", 2));
         this.contacts.put(3, new Contact("undefined", "", 3));
         this.contacts.put(4, new Contact("undefined", "", 4));
         this.contacts.put(5, new Contact("undefined", "", 5));
@@ -46,7 +44,7 @@ public class Profil {
 
     }
 
-    public Profil(int id, String name, String pointing, int lineSpeed, int lineSize, String lineColorH, String lineColorV, String squareColor, int squareWidth, int squareHeight, int scrollSpeed, HashMap<Integer, Contact> contacts){
+    public Profil(int id, String name, String pointing, int lineSpeed, int lineSize, String lineColorH, String lineColorV, String squareColor, int scrollSpeed, String serviceColor, int serviceOpacity, HashMap<Integer, Contact> contacts){
 
         this.id = id;
         this.name = name;
@@ -56,10 +54,9 @@ public class Profil {
         this.lineColorH = lineColorH;
         this.lineColorV = lineColorV;
         this.squareColor = squareColor;
-        this.squareWidth = squareWidth;
-        this.squareHeight = squareHeight;
-        this.squarePauseTime = 1000;
         this.scrollSpeed = scrollSpeed;
+        this.serviceColor = serviceColor;
+        this.serviceOpacity = serviceOpacity;
         this.contacts = contacts;
 
     }
@@ -152,34 +149,29 @@ public class Profil {
         return color.substring(0,1)+"50"+color.substring(3,9);
     }
 
-    public void setSquareWidth(int width){
-        this.squareWidth=width;
+    public int getServiceOpacity() {
+        return serviceOpacity;
     }
 
-    public void setSquareHeight(int height){
-        this.squareHeight=height;
+    public void setServiceOpacity(int serviceOpacity) {
+        this.serviceOpacity = serviceOpacity;
     }
 
-    public int getSquareWidth(){
-        return this.squareWidth;
+    public float getServiceOpacityFloat() {
+        return 0.1f * serviceOpacity;
     }
 
-    public int getSquareHeight(){
-        return this.squareHeight;
+    public String getServiceColor() {
+        return serviceColor;
     }
 
-    public void setDensity(float density){
-        this.squareDensity=density;
+    public int getServiceColorInt(){
+        return Color.parseColor(this.serviceColor);
     }
 
-    public float getDensity(){
-        return squareDensity;
+    public void setServiceColor(int color){
+        this.serviceColor=getHexaColor(color);
     }
-
-    public int getSquarePauseTime(){
-        return squarePauseTime;
-    }
-
 
     public int getScrollSpeed() {
         return scrollSpeed;

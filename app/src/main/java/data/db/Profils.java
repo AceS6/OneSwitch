@@ -25,10 +25,11 @@ public class Profils extends SQLiteOpenHelper {
     public static final String PROFIL_LINE_SIZE = "linesize";
     public static final String PROFIL_LINE_COLORH = "linecolorh";
     public static final String PROFIL_LINE_COLORV = "linecolorv";
-    public static final String PROFIL_SQUARE_WIDTH = "squarewidth";
-    public static final String PROFIL_SQUARE_HEIGHT = "squareheight";
     public static final String PROFIL_SQUARE_COLOR = "squarecolor";
     public static final String PROFIL_SCROLL_SPEED = "scrollspeed";
+    public static final String PROFIL_SERVICE_COLOR = "servicecolor";
+    public static final String PROFIL_SERVICE_OPACITY = "servicespeed";
+
 
 
     // ----- CONTACT
@@ -51,10 +52,10 @@ public class Profils extends SQLiteOpenHelper {
             + PROFIL_LINE_SIZE + " INTEGER DEFAULT 5,"
             + PROFIL_LINE_COLORH + " TEXT DEFAULT '#f44336',"
             + PROFIL_LINE_COLORV + " TEXT DEFAULT ' #f44336',"
-            + PROFIL_SQUARE_WIDTH + " INTEGER DEFAULT 5,"
-            + PROFIL_SQUARE_HEIGHT + " INTEGER DEFAULT 5,"
             + PROFIL_SQUARE_COLOR + " TEXT DEFAULT ' #f44336',"
-            + PROFIL_SCROLL_SPEED + " INTEGER DEFAULT 5"
+            + PROFIL_SCROLL_SPEED + " INTEGER DEFAULT 5,"
+            + PROFIL_SERVICE_COLOR + " TEXT DEFAULT '#BBDEFB',"
+            + PROFIL_SERVICE_OPACITY + " INTEGER DEFAULT 5"
             + ");";
 
     private static final String CONTACT_CREATE = "CREATE TABLE " + CONTACT + "("

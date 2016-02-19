@@ -9,8 +9,14 @@
         android:showAsAction="always"
         android:title="Add Profil"
         android:icon="@drawable/ic_add_profil"/>
+    <item
+        android:id="@+id/swap_profil"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Swap Profil"
+        android:icon="@drawable/ic_swap_profil"/>
 
 </menu>
 
 
-<!-- From: file:/C:/Users/Quentin/AndroidStudioProjects/OneSwitch/app/src/main/res/menu/main.xml -->
+<!-- From: file:/home/sauray/Workspace/android/OneSwitch/app/src/main/res/menu/main.xml -->
