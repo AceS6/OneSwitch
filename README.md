@@ -6,5 +6,3 @@ Be careful, this program can break your device if not used correctly.
 
 #installation
 Root your device and install the apk with a basic installer. You will need to allow untrusted sources.
-
-Follow the user guide pdf provided in the repository.
